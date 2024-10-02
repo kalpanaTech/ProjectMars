@@ -57,8 +57,45 @@ namespace ProjectMars.SpecflowPages.Utils
         public void DeleteLanguage_Start()
         {
             AddLanguage languageDeleteActionsObj = new AddLanguage();
-            languageDeleteActionsObj.LanguageDeleteActions(driver);
+            languageDeleteActionsObj.LanguageDeleteActions(driver, "");
         }
+
+
+        [Test, Order(4), Description("This test will be verified the Skill Add process")]
+        public void AddSkill_Start()
+        {
+            AddSkill addSkillActionsObj = new AddSkill();
+            addSkillActionsObj.AddSkillActions(driver, "");
+
+            AddSkill addSkillLevelActionsObj = new AddSkill();
+            addSkillLevelActionsObj.AddSkillLevelActions(driver, "");
+
+            AddSkill addSkillOptionActionsObj = new AddSkill();
+            addSkillOptionActionsObj.AddSkillOptionActions(driver, "");
+            
+        }
+
+        [Test, Order(5), Description("This test will be verified the Skill Updating process")]
+
+        public void UpdateSkill_Start()
+        {
+            AddSkill updateSkillActionsObj = new AddSkill();
+            updateSkillActionsObj.UpdateSkillActions(driver, "");
+
+            AddSkill updateSkillLevelActionsObj = new AddSkill();
+            updateSkillLevelActionsObj.UpdateSkillLevelActions(driver, "");
+
+            AddSkill updateSkillOptionActionsObj = new AddSkill();
+            updateSkillOptionActionsObj.UpdateSkillOptionActions(driver, "");
+        }
+
+        [Test, Order(6), Description("This test will be verified the Skill Deleting process")]
+        public void DeleteSkill_Start()
+        {
+            AddSkill skillDeleteActionsObj = new AddSkill();
+            skillDeleteActionsObj.SkillDeleteActions(driver, "");
+        }
+
 
         [TearDown]
         public void CloseTestRun()

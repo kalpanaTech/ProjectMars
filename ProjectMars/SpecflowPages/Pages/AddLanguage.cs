@@ -17,7 +17,7 @@ namespace ProjectMars.SpecflowPages.Pages
         private readonly By languagesTabLocator = By.XPath("//A[@class = 'item active'][text() = 'Languages']");
         IWebElement languagesTab;
 
-        private readonly By addNewButtonLocator = By.XPath("//th[@class='right aligned']//div[@class='ui teal button ' and text()='Add New']");
+        private readonly By addNewButtonLocator = By.XPath("//*[@id=\"account-profile-section\"]/div/section[2]/div/div/div/div[3]/form/div[2]/div/div[2]/div/table/thead/tr/th[3]/div");
         IWebElement addNewButton;
 
         private readonly By addLanguageTextBoxLocator = By.XPath("//input[@placeholder = 'Add Language' and @type = 'text']");
@@ -345,7 +345,7 @@ namespace ProjectMars.SpecflowPages.Pages
             return deletedLanguage.Text;
         }
 
-        public void LanguageDeleteActions(IWebDriver driver)
+        public void LanguageDeleteActions(IWebDriver driver, string deletedLanguageText)
         {
             Wait.WaitToBeClickable(driver, deleteButtonLocator, 2);
             try
@@ -359,27 +359,28 @@ namespace ProjectMars.SpecflowPages.Pages
             }
 
             // verify the toast message
-            //Wait.WaitToBeClickable(driver, toastMessageLocator, 1);
-            //try
-            //{
-                //toastMessage = driver.FindElement(toastMessageLocator);
+            Wait.WaitToBeClickable(driver, toastMessageLocator, 1);
+            try
+            {
+                toastMessage = driver.FindElement(toastMessageLocator);
 
-                //string messageText = toastMessage.Text;
+                string messageText = toastMessage.Text;
 
 
-                //if (messageText == deletedLanguage.Text + " has been deleted from your languages")
-                //{
-                    //Console.WriteLine("Toast message text is correct: " + messageText);
-                //}
-               // else
-               // {
-               //     Console.WriteLine("Toast message text is incorrect. Expected: Success, but found: " + messageText);
-               // }
-           // }
-            //catch (Exception ex)
-          //  {
-               // Assert.Fail(" Language Delete Toast message not located:" + ex.Message);
-            //}
+                if (messageText == deletedLanguageText + " has been deleted from your languages")
+                {
+                    Console.WriteLine("Toast message text is correct: " + messageText);
+                }
+                else
+                {
+                    Console.WriteLine("Toast message text is incorrect. Expected: Success, but found: " + messageText);
+                }
+            }
+            catch (Exception ex)
+            {
+                Assert.Fail(" Language Delete Toast message not located:" + ex.Message);
+            }
+
         }
         public string GetExistingLanguage(IWebDriver driver)
         {
