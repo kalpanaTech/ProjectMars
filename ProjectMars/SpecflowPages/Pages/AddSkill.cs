@@ -48,6 +48,18 @@ namespace ProjectMars.SpecflowPages.Pages
         private readonly By addedSkillLevelLocator = By.XPath("//*[@id=\"account-profile-section\"]/div/section[2]/div/div/div/div[3]/form/div[3]/div/div[2]/div/table/tbody[last()]/tr/td[2]");
         IWebElement addedSkillLevel;
 
+        private readonly By skillsTabProfilePageLocator = By.XPath("//*[@id=\"account-profile-section\"]/div/section[2]/div/div/div/div[3]/form/div[1]/a[3]");
+        IWebElement skillsTabProfilePage;
+
+        private readonly By addedSkillProfilePageLocator = By.XPath("//*[@id=\"account-profile-section\"]/div/section[2]/div/div/div/div[3]/form/div[4]/table/tbody/tr[last()]/td[1]");
+        IWebElement addedSkillProfilePage;
+
+        private readonly By addedSkillLevelProfilePageLocator = By.XPath("//*[@id=\"account-profile-section\"]/div/section[2]/div/div/div/div[3]/form/div[4]/table/tbody/tr[last()]/td[2]");
+        IWebElement addedSkillLevelProfilePage;
+
+
+
+
         private readonly By updateSkillIconLocator = By.XPath("//*[@id=\"account-profile-section\"]/div/section[2]/div/div/div/div[3]/form/div[3]/div/div[2]/div/table/tbody[last()]/tr/td[3]/span[1]/i");
         IWebElement updateSkillIcon;                             
 
@@ -215,6 +227,34 @@ namespace ProjectMars.SpecflowPages.Pages
             Wait.WaitToBeClickable(driver, addedSkillLevelLocator, 2);
             IWebElement addedSkillLevel = driver.FindElement(addedSkillLevelLocator);
             return addedSkillLevel.Text;
+        }
+
+        public void ViewAddedSkillDetailsOnProfilePage(IWebDriver driver, string skill, string skillLevel)
+        {
+            Wait.WaitToBeClickable(driver, skillsTabProfilePageLocator, 2);
+            try
+            {
+                skillsTabProfilePage = driver.FindElement(skillsTabProfilePageLocator);
+                skillsTabProfilePage.Click();
+            }
+            catch (Exception ex)
+            {
+                Assert.Fail("Skills Tab of the Profile Page is not located:" + ex.Message);
+            }
+        }
+
+        public string GetAddedSkillProfilePage(IWebDriver driver)
+        {
+            Wait.WaitToBeClickable(driver, addedSkillProfilePageLocator, 2);
+            IWebElement addedSkillProfilePage = driver.FindElement(addedSkillProfilePageLocator);
+            return addedSkillProfilePage.Text;
+        }
+
+        public string GetAddedSkillLevelProfilePage(IWebDriver driver)
+        {
+            Wait.WaitToBeClickable(driver, addedSkillLevelProfilePageLocator, 2);
+            IWebElement addedSkillLevelProfilePage = driver.FindElement(addedSkillLevelProfilePageLocator);
+            return addedSkillLevelProfilePage.Text;
         }
 
         public void UpdateSkillActions(IWebDriver driver, string skill)

@@ -4,6 +4,7 @@ using System;
 using TechTalk.SpecFlow;
 using ProjectMars.SpecflowPages.Pages;
 using ProjectMars.SpecflowPages.Helpers;
+using OpenQA.Selenium;
 
 namespace ProjectMars.Feature
 {
@@ -16,6 +17,10 @@ namespace ProjectMars.Feature
         AddLanguage addLanguageLevelObj = new AddLanguage();
         AddLanguage addLanguageOptionObj = new AddLanguage();
 
+        AddLanguage profileOpenActionsObj = new AddLanguage();  
+
+        AddLanguage viewAddedLanguageDetailsOnProfilePageObj = new AddLanguage();
+
         AddLanguage updateLanguageActionsObj = new AddLanguage();
         AddLanguage updateLanguageLevelActionsObj = new AddLanguage();
         AddLanguage updateLanguageOptionActionsObj = new AddLanguage();
@@ -26,11 +31,15 @@ namespace ProjectMars.Feature
         AddSkill addSkillLevelActionsObj = new AddSkill();
         AddSkill addSkillOptionActionsObj = new AddSkill();
 
+        AddSkill viewAddedSkillDetailsOnProfilePageObj = new AddSkill();
+
         AddSkill updateSkillActionsObj = new AddSkill();
         AddSkill updateSkillLevelActionsObj = new AddSkill();
         AddSkill updateSkillOptionActionsObj = new AddSkill();
 
         AddSkill skillDeleteActionsObj = new AddSkill();
+
+        CreateProfile createProfileActionsObj = new CreateProfile();
 
         string deletedLanguage;
         string deletedSkill;
@@ -61,6 +70,26 @@ namespace ProjectMars.Feature
 
             Assert.That(addedLanguage == language, "Language has not been updated");
             Assert.That(addedLanguageLevel == languageLevel, "Language Level has not been updated");
+        }
+
+        [When(@"I open the '([^']*)' profile to view added (languages|skills)")]
+        public void WhenIOpenTheProfileToViewAddedLanguages(string user, string options)
+        {
+            profileOpenActionsObj.ProfileOpenActions(driver, user);
+        }
+
+
+        [Then(@"the people seeking for languages can see what '([^']*)' and '([^']*)' I hold")]
+        public void ThenThePeopleSeekingForLanguagesCanSeeWhatAndIHold(string language, string languageLevel)
+        {
+            viewAddedLanguageDetailsOnProfilePageObj.ViewAddedLanguageDetailsOnProfilePage(driver, language, languageLevel);
+
+            string addedLanguageProfilePage = viewAddedLanguageDetailsOnProfilePageObj.GetAddedLanguageProfilePage(driver);
+            string addedLanguageLevelProfilePage = viewAddedLanguageDetailsOnProfilePageObj.GetAddedLanguageLevelProfilePage(driver);
+
+            Assert.That(addedLanguageProfilePage == language, "Language is not showing to other users");
+            Assert.That(addedLanguageLevelProfilePage == languageLevel, "Language Level is not showing to other users");
+
         }
 
 
@@ -106,6 +135,19 @@ namespace ProjectMars.Feature
             Assert.That(addedSkillLevel == skillLevel, "Skill Level has not been updated");
         }
 
+        [Then(@"the people seeking for skills can see what '([^']*)' and '([^']*)' I hold")]
+        public void ThenThePeopleSeekingForSkillsCanSeeWhatAndIHold(string skill, string skillLevel)
+        {
+            viewAddedSkillDetailsOnProfilePageObj.ViewAddedSkillDetailsOnProfilePage(driver, skill, skillLevel);
+
+            string addedSkillProfilePage = viewAddedSkillDetailsOnProfilePageObj.GetAddedSkillProfilePage(driver);
+            string addedSkillLevelProfilePage = viewAddedSkillDetailsOnProfilePageObj.GetAddedSkillLevelProfilePage(driver);
+
+            Assert.That(addedSkillProfilePage == skill, "Skill is not showing to other users");
+            Assert.That(addedSkillLevelProfilePage == skillLevel, "Skill Level is not showing to other users");
+        }
+
+
         [Given(@"I update existing '([^']*)' and '([^']*)' on Skills section")]
         public void GivenIUpdateExistingAndOnSkillsSection(string skill, string skillLevel)
         {
@@ -129,13 +171,20 @@ namespace ProjectMars.Feature
             Assert.That(deletedSkill != existingSkill, "Skill has not been deleted");
         }
 
+   
+        //User create profile
+        //[Given(@"I provide '([^']*)', '([^']*)', '([^']*)', '([^']*)', '([^']*)', '([^']*)', '([^']*)', '([^']*)' and '([^']*)' on Service Listning page")]
+       // public void GivenIProvideAndOnServiceListningPage(string title, string description, string tags, string serviceType, string locationType, string skillTrade, string skillExchange, string endDate, string activeStatus)
+      //  {
+       //     createProfileActionsObj.CreateProfileActions(driver, title, description, tags, serviceType, locationType, skillTrade, skillExchange, endDate, activeStatus);
+       // }
 
 
         [AfterScenario]
 
         public void CloseTestRun()
         {
-            driver.Quit();
+           driver.Quit();
         }
 
     }

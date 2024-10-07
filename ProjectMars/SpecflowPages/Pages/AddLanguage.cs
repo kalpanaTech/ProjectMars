@@ -50,6 +50,33 @@ namespace ProjectMars.SpecflowPages.Pages
         private readonly By addedLanguageLevelLocator = By.XPath("//*[@id=\"account-profile-section\"]/div/section[2]/div/div/div/div[3]/form/div[2]/div/div[2]/div/table/tbody[last()]/tr/td[2]");
         IWebElement addedLanguageLevel;
 
+        private readonly By searchIconLocator = By.XPath("//*[@id=\"account-profile-section\"]/div/div[1]/div[1]/i");
+        IWebElement searchIcon;
+
+        private readonly By categoryProgrammingLocator = By.XPath("//*[@id=\"service-search-section\"]/div[2]/div/section/div/div[1]/div[1]/div/a[7]");
+        IWebElement categoryProgramming;
+
+        private readonly By subCategoryQALocator = By.XPath("//*[@id=\"service-search-section\"]/div[2]/div/section/div/div[1]/div[1]/div/a[11]");
+        IWebElement subCategoryQA;
+
+        private readonly By userSearchBoxLocator = By.XPath("//*[@id=\"service-search-section\"]/div[2]/div/section/div/div[1]/div[3]/div[1]/div/div[1]/input");
+        IWebElement userSearchBox;
+
+        private readonly By firstSearchResultLocator = By.XPath("//*[@id=\"service-search-section\"]/div[2]/div/section/div/div[1]/div[3]/div[1]/div/div[2]/div[1]/div/span");
+        IWebElement firstSearchResult;
+
+        private readonly By searchedUserProfiletLocator = By.XPath("//*[@id=\"service-search-section\"]/div[2]/div/section/div/div[2]/div/div[2]/div/div/div/div[1]/a[1]");
+        IWebElement searchedUserProfile;
+
+        private readonly By languagesTabProfilePageLocator = By.XPath("//A[@class = 'item' and @data-tab = 'second'][text() = 'Languages']");
+        IWebElement languagesTabProfilePage;
+
+        private readonly By addedLanguageProfilePageLocator = By.XPath("//*[@id=\"account-profile-section\"]/div/section[2]/div/div/div/div[3]/form/div[3]/table/tbody/tr[last()]/td[1]");
+        IWebElement addedLanguageProfilePage;
+
+        private readonly By addedLanguageLevelProfilePageLocator = By.XPath("//*[@id=\"account-profile-section\"]/div/section[2]/div/div/div/div[3]/form/div[3]/table/tbody/tr[last()]/td[2]");
+        IWebElement addedLanguageLevelProfilePage;
+
         private readonly By updateIconLocator = By.XPath("//*[@id=\"account-profile-section\"]/div/section[2]/div/div/div/div[3]/form/div[2]/div/div[2]/div/table/tbody[last()]/tr/td[3]/span[1]/i");
         IWebElement updateIcon;
 
@@ -226,7 +253,102 @@ namespace ProjectMars.SpecflowPages.Pages
             return addedLanguageLevel.Text;
         }
 
+        public void ProfileOpenActions(IWebDriver driver, string user)
+        {
+            Wait.WaitToBeClickable(driver, searchIconLocator, 2);
+            try
+            {
+                searchIcon = driver.FindElement(searchIconLocator);
+                searchIcon.Click();
+            }
+            catch (Exception ex)
+            {
+                Assert.Fail("Search Icon not located:" + ex.Message);
+            }
 
+            Wait.WaitToBeClickable(driver, categoryProgrammingLocator, 2);
+            try
+            {
+                categoryProgramming = driver.FindElement(categoryProgrammingLocator);
+                categoryProgramming.Click();
+            }
+            catch (Exception ex)
+            {
+                Assert.Fail("Category Programming not located:" + ex.Message);
+            }
+
+            Wait.WaitToBeClickable(driver, subCategoryQALocator, 2);
+            try 
+            {
+                subCategoryQA = driver.FindElement(subCategoryQALocator);
+                subCategoryQA.Click();
+            }
+            catch (Exception ex)
+            {
+                Assert.Fail("Sub Category QA not located:" + ex.Message);
+            }
+
+            Wait.WaitToBeClickable(driver, userSearchBoxLocator, 2);
+            try
+            {
+                userSearchBox = driver.FindElement(userSearchBoxLocator);
+                userSearchBox.SendKeys(user);
+            }
+            catch (Exception ex)
+            {
+                Assert.Fail(" User Search Box not located:" + ex.Message);
+            }
+
+            Wait.WaitToBeClickable(driver, firstSearchResultLocator, 5);
+            try
+            {
+                firstSearchResult = driver.FindElement(firstSearchResultLocator);
+                firstSearchResult.Click();
+            }
+            catch (Exception ex)
+            {
+                Assert.Fail(" First Search Result not located:" + ex.Message);
+            }
+
+            Wait.WaitToBeClickable(driver, searchedUserProfiletLocator, 5);
+            try
+            {
+                searchedUserProfile = driver.FindElement(searchedUserProfiletLocator);
+                searchedUserProfile.Click();
+            }
+            catch (Exception ex)
+            {
+                Assert.Fail(" Searched User Profile not located:" + ex.Message);
+            }
+        }
+
+        public void ViewAddedLanguageDetailsOnProfilePage(IWebDriver driver, string language, string languageLevel)
+        {
+            Wait.WaitToBeClickable(driver, languagesTabProfilePageLocator, 2);
+            try
+            {
+                languagesTabProfilePage = driver.FindElement(languagesTabProfilePageLocator);
+                languagesTabProfilePage.Click();
+            }
+            catch (Exception ex)
+            {
+                Assert.Fail(" Languages Tab of the Profile Page is not located:" + ex.Message);
+            }
+        }
+
+        public string GetAddedLanguageProfilePage(IWebDriver driver)
+        {
+            Wait.WaitToBeClickable(driver, addedLanguageProfilePageLocator, 2);
+            IWebElement addedLanguageProfilePage = driver.FindElement(addedLanguageProfilePageLocator);
+            return addedLanguageProfilePage.Text;
+        }
+
+        public string GetAddedLanguageLevelProfilePage(IWebDriver driver)
+        {
+            Wait.WaitToBeClickable(driver, addedLanguageLevelProfilePageLocator, 2);
+            IWebElement addedLanguageLevelProfilePage = driver.FindElement(addedLanguageLevelProfilePageLocator);
+            return addedLanguageLevelProfilePage.Text;
+        }
 
         public void UpdateLanguageActions(IWebDriver driver, string language)
         {

@@ -37,6 +37,12 @@ namespace ProjectMars.SpecflowPages.Utils
            
             AddLanguage addLanguageOptionObj = new AddLanguage();
             addLanguageOptionObj.AddLanguageOptionActions(driver, "");
+
+            AddLanguage profileOpenActionsObj = new AddLanguage();
+            profileOpenActionsObj.ProfileOpenActions(driver, "");
+
+            AddLanguage viewAddedLanguageDetailsOnProfilePageObj = new AddLanguage();
+            viewAddedLanguageDetailsOnProfilePageObj.ViewAddedLanguageDetailsOnProfilePage(driver, "", "");
         }
 
         [Test, Order(2), Description("This test will be verified the Language Updating process")]
@@ -72,7 +78,11 @@ namespace ProjectMars.SpecflowPages.Utils
 
             AddSkill addSkillOptionActionsObj = new AddSkill();
             addSkillOptionActionsObj.AddSkillOptionActions(driver, "");
-            
+
+            AddSkill viewAddedSkillDetailsOnProfilePageObj = new AddSkill();
+            viewAddedSkillDetailsOnProfilePageObj.ViewAddedSkillDetailsOnProfilePage(driver, "", "");
+
+
         }
 
         [Test, Order(5), Description("This test will be verified the Skill Updating process")]
@@ -96,6 +106,14 @@ namespace ProjectMars.SpecflowPages.Utils
             skillDeleteActionsObj.SkillDeleteActions(driver, "");
         }
 
+        //[Test, Order(7), Description("This test will be verified the creating profile process")]
+       // public void CreateProfile_Start()
+       // {
+        //    CreateProfile createProfileActionsObj = new CreateProfile();
+         //   createProfileActionsObj.CreateProfileActions(driver, "", "", "", "", "", "", "", "", "" );
+       // }
+
+        
 
         [TearDown]
         public void CloseTestRun()
