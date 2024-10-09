@@ -104,14 +104,23 @@ namespace ProjectMars.SpecflowPages.Pages
         private readonly By deleteButtonLocator = By.XPath("//*[@id=\"account-profile-section\"]/div/section[2]/div/div/div/div[3]/form/div[2]/div/div[2]/div/table/tbody[last()]/tr/td[3]/span[2]/i");
         IWebElement deleteButton;
 
-        private readonly By deletedLanguageLocator = By.XPath("//*[@id=\"account-profile-section\"]/div/section[2]/div/div/div/div[3]/form/div[2]/div/div[2]/div/table/tbody[last()]/tr/td[1]");
-        IWebElement deletedLanguage;
+        private readonly By existingLastLanguageLocator = By.XPath("//*[@id=\"account-profile-section\"]/div/section[2]/div/div/div/div[3]/form/div[2]/div/div[2]/div/table/tbody[last()]/tr/td[1]");
+        IWebElement existingLastLanguage;
 
-        private readonly By existingLanguageLocator = By.XPath("//*[@id=\"account-profile-section\"]/div/section[2]/div/div/div/div[3]/form/div[2]/div/div[2]/div/table/tbody[last()]/tr/td[1]");
-        IWebElement existingLanguage;
+        private readonly By existingLastLanguageLevelLocator = By.XPath("//*[@id=\"account-profile-section\"]/div/section[2]/div/div/div/div[3]/form/div[2]/div/div[2]/div/table/tbody[last()]/tr/td[2]");
+        IWebElement existingLastLanguageLevel;
+
+        private readonly By addLanguageCancelButtonLocator = By.XPath("//*[@id=\"account-profile-section\"]/div/section[2]/div/div/div/div[3]/form/div[2]/div/div[2]/div/div/div[3]/input[2]");
+        IWebElement addLanguageCancelButton;
+
+        private readonly By updateLanguageCancelButtonLocator = By.XPath("//*[@id=\"account-profile-section\"]/div/section[2]/div/div/div/div[3]/form/div[2]/div/div[2]/div/table/tbody[last()]/tr/td/div/span/input[2]");
+        IWebElement updateLanguageCancelButton;
 
 
-        public void AddLanguageActions(IWebDriver driver, string language)
+
+
+
+        public void AddNewLanguageButtonActions(IWebDriver driver)
         {
             Wait.WaitToBeClickable(driver, languagesTabLocator, 2);
             try
@@ -135,6 +144,9 @@ namespace ProjectMars.SpecflowPages.Pages
                 Assert.Fail("Add New Button not located:" + ex.Message);
             }
 
+        }
+        public void AddLanguageActions(IWebDriver driver, string language)
+        {
             Wait.WaitToBeClickable(driver, addLanguageTextBoxLocator, 2);
             try
             {
@@ -147,9 +159,8 @@ namespace ProjectMars.SpecflowPages.Pages
             }
         }
 
-
-
-        public void AddLanguageLevelActions(IWebDriver driver, string languageLevel) {
+        public void AddLanguageLevelActions(IWebDriver driver, string languageLevel)
+        {
 
             Wait.WaitToBeClickable(driver, languageLevelDropdownLocator, 2);
             try
@@ -197,7 +208,7 @@ namespace ProjectMars.SpecflowPages.Pages
 
 
 
-        public void AddLanguageOptionActions(IWebDriver driver, string language)
+        public void AddLanguageButtonActions(IWebDriver driver)
         {
 
 
@@ -206,28 +217,58 @@ namespace ProjectMars.SpecflowPages.Pages
             {
                 addLanguageButton = driver.FindElement(addLanguageButtonLocator);
                 addLanguageButton.Click();
+
             }
+
             catch (Exception ex)
             {
                 Assert.Fail(" Add Language Button not located:" + ex.Message);
             }
+        }
 
-            // verify the toast message
-            Wait.WaitToBeClickable(driver, toastMessageLocator, 1);
+        public void VerifyToastMessageActions(IWebDriver driver, string language, string action)
+        {
+
+            Wait.WaitToBeClickable(driver, toastMessageLocator, 2);
             try
             {
                 toastMessage = driver.FindElement(toastMessageLocator);
 
                 string messageText = toastMessage.Text;
 
-                
-                if (messageText == language + " has been added to your languages")
+                if (action == "Add")
                 {
-                    Console.WriteLine("Toast message text is correct: " + messageText);
+
+                    if (messageText == language + " has been added to your languages")
+                    {
+                        Console.WriteLine("Toast message text is correct: " + messageText);
+                    }
+                    else
+                    {
+                        Console.WriteLine("Toast message text is incorrect. Expected: Success, but found: " + messageText);
+                    }
                 }
-                else
+                else if (action == "Update")
                 {
-                    Console.WriteLine("Toast message text is incorrect. Expected: Success, but found: " + messageText);
+                    if (messageText == language + " has been updated to your languages")
+                    {
+                        Console.WriteLine("Toast message text is correct: " + messageText);
+                    }
+                    else
+                    {
+                        Console.WriteLine("Toast message text is incorrect. Expected: Success, but found: " + messageText);
+                    }
+                }
+                else if (action == "Delete")
+                {
+                    if (messageText == language + " has been deleted from your languages")
+                    {
+                        Console.WriteLine("Toast message text is correct: " + messageText);
+                    }
+                    else
+                    {
+                        Console.WriteLine("Toast message text is incorrect. Expected: Success, but found: " + messageText);
+                    }
                 }
             }
             catch (Exception ex)
@@ -241,14 +282,15 @@ namespace ProjectMars.SpecflowPages.Pages
 
         public string GetAddedLanguage(IWebDriver driver)
         {
-            Wait.WaitToBeClickable(driver, addedLanguageLocator, 2);
-            IWebElement addedLanguage = driver.FindElement(addedLanguageLocator); 
+
+            Wait.WaitToBeVisible(driver, addedLanguageLocator, 2);
+            IWebElement addedLanguage = driver.FindElement(addedLanguageLocator);
             return addedLanguage.Text;
         }
 
         public string GetAddedLanguageLevel(IWebDriver driver)
         {
-            Wait.WaitToBeClickable(driver, addedLanguageLevelLocator, 2);
+            Wait.WaitToBeVisible(driver, addedLanguageLevelLocator, 2);
             IWebElement addedLanguageLevel = driver.FindElement(addedLanguageLevelLocator);
             return addedLanguageLevel.Text;
         }
@@ -278,7 +320,7 @@ namespace ProjectMars.SpecflowPages.Pages
             }
 
             Wait.WaitToBeClickable(driver, subCategoryQALocator, 2);
-            try 
+            try
             {
                 subCategoryQA = driver.FindElement(subCategoryQALocator);
                 subCategoryQA.Click();
@@ -423,7 +465,7 @@ namespace ProjectMars.SpecflowPages.Pages
             }
         }
 
-        public void UpdateLanguageOptionActions(IWebDriver driver, string language)
+        public void UpdateLanguageOptionActions(IWebDriver driver)
         {
             Wait.WaitToBeClickable(driver, updateButtonLocator, 2);
             try
@@ -435,39 +477,9 @@ namespace ProjectMars.SpecflowPages.Pages
             {
                 Assert.Fail("Update Button not located:" + ex.Message);
             }
-
-            // verify the toast message
-            Wait.WaitToBeClickable(driver, toastMessageLocator, 1);
-            try
-            {
-                toastMessage = driver.FindElement(toastMessageLocator);
-
-                string messageText = toastMessage.Text;
-
-
-                if (messageText == language + " has been updated to your languages")
-                {
-                    Console.WriteLine("Toast message text is correct: " + messageText);
-                }
-                else
-                {
-                    Console.WriteLine("Toast message text is incorrect. Expected: Success, but found: " + messageText);
-                }
-            }
-            catch (Exception ex)
-            {
-                Assert.Fail(" Language Update Toast message not located:" + ex.Message);
-            }
         }
 
-        public string GetDeletedLanguage(IWebDriver driver)
-        {
-            Wait.WaitToBeVisible(driver, deletedLanguageLocator, 2);
-            IWebElement deletedLanguage = driver.FindElement(deletedLanguageLocator);
-            return deletedLanguage.Text;
-        }
-
-        public void LanguageDeleteActions(IWebDriver driver, string deletedLanguageText)
+        public void LanguageDeleteActions(IWebDriver driver)
         {
             Wait.WaitToBeClickable(driver, deleteButtonLocator, 2);
             try
@@ -480,37 +492,45 @@ namespace ProjectMars.SpecflowPages.Pages
                 Assert.Fail("Delete Button not located:" + ex.Message);
             }
 
-            // verify the toast message
-            Wait.WaitToBeClickable(driver, toastMessageLocator, 1);
+        }
+        public string GetExistingLastLanguage(IWebDriver driver)
+        {
+            driver.Navigate().Refresh();
+
+            Wait.WaitToBeVisible(driver, existingLastLanguageLocator, 4);
+            IWebElement existingLastLanguage = driver.FindElement(existingLastLanguageLocator);
+            return existingLastLanguage.Text;
+        }
+        public void AddLanguageCancelButtonActions(IWebDriver driver)
+        {
+
+            Wait.WaitToBeClickable(driver, addLanguageCancelButtonLocator, 2);
             try
             {
-                toastMessage = driver.FindElement(toastMessageLocator);
-
-                string messageText = toastMessage.Text;
-
-
-                if (messageText == deletedLanguageText + " has been deleted from your languages")
-                {
-                    Console.WriteLine("Toast message text is correct: " + messageText);
-                }
-                else
-                {
-                    Console.WriteLine("Toast message text is incorrect. Expected: Success, but found: " + messageText);
-                }
+                addLanguageCancelButton = driver.FindElement(addLanguageCancelButtonLocator);
+                addLanguageCancelButton.Click();
             }
             catch (Exception ex)
             {
-                Assert.Fail(" Language Delete Toast message not located:" + ex.Message);
+                Assert.Fail("Add Language Cancel Button not located:" + ex.Message);
             }
-
         }
-        public string GetExistingLanguage(IWebDriver driver)
+
+        public void UpdateLanguageCancelButtonActions(IWebDriver driver)
         {
-            Wait.WaitToBeVisible(driver, existingLanguageLocator, 4);
-            IWebElement existingLanguage = driver.FindElement(existingLanguageLocator);
-            return existingLanguage.Text;
+
+            Wait.WaitToBeClickable(driver, updateLanguageCancelButtonLocator, 2);
+            try
+            {
+                updateLanguageCancelButton = driver.FindElement(updateLanguageCancelButtonLocator);
+                updateLanguageCancelButton.Click();
+            }
+            catch (Exception ex)
+            {
+                Assert.Fail("Update Language Cancel Button not located:" + ex.Message);
+            }
         }
 
 
     }
-    }
+}

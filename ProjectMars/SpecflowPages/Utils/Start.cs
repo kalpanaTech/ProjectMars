@@ -29,6 +29,9 @@ namespace ProjectMars.SpecflowPages.Utils
         
         public void AddLanguage_Start()
         {
+            AddLanguage addNewLanguageButtonActionsObj = new AddLanguage();
+            addNewLanguageButtonActionsObj.AddNewLanguageButtonActions(driver);
+
             AddLanguage addLanguagePageObj = new AddLanguage();
             addLanguagePageObj.AddLanguageActions(driver, "");
 
@@ -36,7 +39,10 @@ namespace ProjectMars.SpecflowPages.Utils
             addLanguageLevelObj.AddLanguageLevelActions(driver, "");
            
             AddLanguage addLanguageOptionObj = new AddLanguage();
-            addLanguageOptionObj.AddLanguageOptionActions(driver, "");
+            addLanguageOptionObj.AddLanguageButtonActions(driver);
+
+            AddLanguage verifyToastMessageActionsObj = new AddLanguage();
+            verifyToastMessageActionsObj.VerifyToastMessageActions(driver, "", "");
 
             AddLanguage profileOpenActionsObj = new AddLanguage();
             profileOpenActionsObj.ProfileOpenActions(driver, "");
@@ -56,28 +62,41 @@ namespace ProjectMars.SpecflowPages.Utils
             updateLanguageLevelActionsObj.UpdateLanguageLevelActions(driver, "");
 
             AddLanguage updateLanguageOptionActionsObj = new AddLanguage();
-            updateLanguageOptionActionsObj.UpdateLanguageOptionActions(driver, "");
+            updateLanguageOptionActionsObj.UpdateLanguageOptionActions(driver);
         }
 
         [Test, Order(3), Description("This test will be verified the Language Deleting process")]
         public void DeleteLanguage_Start()
         {
             AddLanguage languageDeleteActionsObj = new AddLanguage();
-            languageDeleteActionsObj.LanguageDeleteActions(driver, "");
+            languageDeleteActionsObj.LanguageDeleteActions(driver);
+        }
+
+        [Test, Order(3), Description("This test will be verified the Language Deleting process")]
+        public void CancelLanguage_Start()
+        {
+            AddLanguage addLanguageCancelButtonActionsObj = new AddLanguage();
+            addLanguageCancelButtonActionsObj.AddLanguageCancelButtonActions(driver);
         }
 
 
         [Test, Order(4), Description("This test will be verified the Skill Add process")]
         public void AddSkill_Start()
         {
+            AddSkill addNewSkillButtonActionsObj = new AddSkill();
+            addNewSkillButtonActionsObj.AddNewSkillButtonActions(driver);
+
             AddSkill addSkillActionsObj = new AddSkill();
             addSkillActionsObj.AddSkillActions(driver, "");
 
             AddSkill addSkillLevelActionsObj = new AddSkill();
             addSkillLevelActionsObj.AddSkillLevelActions(driver, "");
 
-            AddSkill addSkillOptionActionsObj = new AddSkill();
-            addSkillOptionActionsObj.AddSkillOptionActions(driver, "");
+            AddSkill addSkillButtonActionsObj = new AddSkill();
+            addSkillButtonActionsObj.AddSkillButtonActions(driver);
+
+            AddSkill verifyToastMessageSkillActionsObj = new AddSkill();
+            verifyToastMessageSkillActionsObj.VerifyToastMessageSkillActions(driver, "", "");
 
             AddSkill viewAddedSkillDetailsOnProfilePageObj = new AddSkill();
             viewAddedSkillDetailsOnProfilePageObj.ViewAddedSkillDetailsOnProfilePage(driver, "", "");
@@ -96,24 +115,32 @@ namespace ProjectMars.SpecflowPages.Utils
             updateSkillLevelActionsObj.UpdateSkillLevelActions(driver, "");
 
             AddSkill updateSkillOptionActionsObj = new AddSkill();
-            updateSkillOptionActionsObj.UpdateSkillOptionActions(driver, "");
+            updateSkillOptionActionsObj.UpdateSkillOptionActions(driver);
         }
 
         [Test, Order(6), Description("This test will be verified the Skill Deleting process")]
         public void DeleteSkill_Start()
         {
             AddSkill skillDeleteActionsObj = new AddSkill();
-            skillDeleteActionsObj.SkillDeleteActions(driver, "");
+            skillDeleteActionsObj.SkillDeleteActions(driver);
         }
 
-        //[Test, Order(7), Description("This test will be verified the creating profile process")]
-       // public void CreateProfile_Start()
-       // {
-        //    CreateProfile createProfileActionsObj = new CreateProfile();
-         //   createProfileActionsObj.CreateProfileActions(driver, "", "", "", "", "", "", "", "", "" );
-       // }
-
+        [Test, Order(7), Description("This test will be verified the Add Skill cancellation process")]
+        public void CancelSkill_Start()
+        {
+            AddSkill addSkillCancelButtonActionsObj = new AddSkill();
+            addSkillCancelButtonActionsObj.AddSkillCancelButtonActions(driver);
+        }
         
+
+        //[Test, Order(7), Description("This test will be verified the creating profile process")]
+        // public void CreateProfile_Start()
+        // {
+        //    CreateProfile createProfileActionsObj = new CreateProfile();
+        //   createProfileActionsObj.CreateProfileActions(driver, "", "", "", "", "", "", "", "", "" );
+        // }
+
+
 
         [TearDown]
         public void CloseTestRun()

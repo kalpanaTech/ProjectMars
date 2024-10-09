@@ -13,9 +13,11 @@ namespace ProjectMars.Feature
     {
         SignIn signInPageObj = new SignIn();
 
+        AddLanguage addNewLanguageButtonActionsObj = new AddLanguage();
         AddLanguage addLanguageObj = new AddLanguage();
         AddLanguage addLanguageLevelObj = new AddLanguage();
-        AddLanguage addLanguageOptionObj = new AddLanguage();
+        AddLanguage addLanguageButtonActions = new AddLanguage();
+        AddLanguage verifyToastMessageActionsObj = new AddLanguage();
 
         AddLanguage profileOpenActionsObj = new AddLanguage();  
 
@@ -27,9 +29,13 @@ namespace ProjectMars.Feature
 
         AddLanguage languageDeleteActionsObj = new AddLanguage();
 
+        AddLanguage addLanguageCancelButtonActionsObj = new AddLanguage();
+
+        AddSkill addNewSkillButtonActionsObj = new AddSkill();  
         AddSkill addSkillActionsObj = new AddSkill();
         AddSkill addSkillLevelActionsObj = new AddSkill();
-        AddSkill addSkillOptionActionsObj = new AddSkill();
+        AddSkill addSkillButtonActionsObj = new AddSkill();
+        AddSkill verifyToastMessageSkillActionsObj = new AddSkill();
 
         AddSkill viewAddedSkillDetailsOnProfilePageObj = new AddSkill();
 
@@ -38,42 +44,66 @@ namespace ProjectMars.Feature
         AddSkill updateSkillOptionActionsObj = new AddSkill();
 
         AddSkill skillDeleteActionsObj = new AddSkill();
+        AddSkill addSkillCancelButtonActionsObj = new AddSkill();
 
         CreateProfile createProfileActionsObj = new CreateProfile();
 
-        string deletedLanguage;
+       
         string deletedSkill;
+        string canceledLanguage;
 
         [Given(@"I logged into profile page successfully")]
         public void GivenILoggedIntoProfilePageSuccessfully()
         {
-            //open Chrome Browser
-            driver = new ChromeDriver();
+            //open the Browser
+            string browser = "chrome";
+            driver = InitializeDriver(browser);
             signInPageObj.LoginActions(driver);
         }
+
+        [Given(@"I click on the Add New button")]
+        public void GivenIClickOnTheAddNewButton()
+        {
+            addNewLanguageButtonActionsObj.AddNewLanguageButtonActions(driver);
+        }
+
 
         [Given(@"I add new '([^']*)' and '([^']*)' to Languages section")]
         public void GivenIAddNewAndToLanguagesSection(string language, string languageLevel)
         {
             addLanguageObj.AddLanguageActions(driver, language);
             addLanguageLevelObj.AddLanguageLevelActions(driver, languageLevel);
-            addLanguageOptionObj.AddLanguageOptionActions(driver, language);
+        }
+
+        [Then(@"I click on the Add button")]
+        public void ThenIClickOnTheAddButton()
+        {
+            addLanguageButtonActions.AddLanguageButtonActions(driver);
+        }
+
+    
+        [Then(@"I can see the (added|updated|deleted) '([^']*)' on the toast message with the '([^']*)'")]
+        public void ThenICanSeeTheAddedOnTheToastMessageWithThe(string option1,string language, string action)
+        {
+            verifyToastMessageActionsObj.VerifyToastMessageActions(driver, language, action);
         }
 
 
         [Then(@"I should be able to view the (added|updated) '([^']*)' and '([^']*)' on Languages section")]
-        public void ThenIShouldBeAbleToViewTheAddedAndOnLanguagesSection(string option, string language, string languageLevel)
+        public void ThenIShouldBeAbleToViewTheAddedAndOnLanguagesSection(string option2, string language, string languageLevel)
         {
 
             string addedLanguage = addLanguageObj.GetAddedLanguage(driver);
             string addedLanguageLevel = addLanguageLevelObj.GetAddedLanguageLevel(driver);
+
+            Console.WriteLine("Actual Language Level: " + addedLanguageLevel);
 
             Assert.That(addedLanguage == language, "Language has not been updated");
             Assert.That(addedLanguageLevel == languageLevel, "Language Level has not been updated");
         }
 
         [When(@"I open the '([^']*)' profile to view added (languages|skills)")]
-        public void WhenIOpenTheProfileToViewAddedLanguages(string user, string options)
+        public void WhenIOpenTheProfileToViewAddedLanguages(string user, string option3)
         {
             profileOpenActionsObj.ProfileOpenActions(driver, user);
         }
@@ -98,38 +128,81 @@ namespace ProjectMars.Feature
         {
             updateLanguageActionsObj.UpdateLanguageActions(driver, language);
             updateLanguageLevelActionsObj.UpdateLanguageLevelActions(driver, languageLevel);
-            updateLanguageOptionActionsObj.UpdateLanguageOptionActions(driver, language);
+            
         }
 
-        [When(@"I delete an existing language")]
-        public void WhenIDeleteAnExistingLanguage()
+        [Then(@"I click on the Update button")]
+        public void ThenIClickOnTheUpdateButton()
         {
-            languageDeleteActionsObj.GetDeletedLanguage(driver);
-            languageDeleteActionsObj.LanguageDeleteActions(driver, deletedLanguage);
+            updateLanguageOptionActionsObj.UpdateLanguageOptionActions(driver);
         }
 
-        [Then(@"the deleted language should not be similar to existing language")]
-        public void ThenTheDeletedLanguageShouldNotBeSimilarToExistingLanguage()
+        [When(@"I delete the added language")]
+        public void WhenIDeleteTheAddedLanguage()
         {
-          
-            string existingLanguage = languageDeleteActionsObj.GetExistingLanguage(driver);
-
-            Assert.That(deletedLanguage != existingLanguage, "Language has not been deleted");
+            languageDeleteActionsObj.LanguageDeleteActions(driver);
         }
+
+        [Then(@"the deleted '([^']*)' should not be included on languages section")]
+        public void ThenTheDeletedShouldNotBeIncludedOnLanguagesSection(string language)
+        {
+            string existingLastLanguage = languageDeleteActionsObj.GetExistingLastLanguage(driver);
+
+            Assert.That(language != existingLastLanguage, "Added Language has not been deleted");
+        }
+
+      
+        [Then(@"I click on the cancel button")]
+        public void ThenIClickOnTheCancelButton()
+        {
+            addLanguageCancelButtonActionsObj.AddLanguageCancelButtonActions(driver);
+        }
+
+        [Then(@"I can see the existing last added '([^']*)' without any change")]
+        public void ThenICanSeeTheExistingLastAddedAndWithoutAnyChange(string language)
+        {
+            string existingLastLanguage = addLanguageCancelButtonActionsObj.GetExistingLastLanguage(driver);
+
+            Console.WriteLine(" Language: " + language);
+            Console.WriteLine("Existing Language: " + existingLastLanguage);
+
+            Assert.That(language != existingLastLanguage, "Add language cancellation failed");
+        }
+
+        [Given(@"I click on the Add New Skill button")]
+        public void GivenIClickOnTheAddNewSkillButton()
+        {
+            addNewSkillButtonActionsObj.AddNewSkillButtonActions(driver);
+        }
+
 
         [Given(@"I add new '([^']*)' and '([^']*)' to Skills section")]
         public void GivenIAddNewAndToSkillsSection(string skill, string skillLevel)
         {
             addSkillActionsObj.AddSkillActions(driver, skill);
             addSkillLevelActionsObj.AddSkillLevelActions(driver, skillLevel);
-            addSkillOptionActionsObj.AddSkillOptionActions(driver, skill);
         }
+
+        [Then(@"I click on the Add Skill button")]
+        public void ThenIClickOnTheAddSkillButton()
+        {
+            addSkillButtonActionsObj.AddSkillButtonActions(driver);
+        }
+
+        [Then(@"I can see the (added|updated|deleted) '([^']*)' on the skill related toast message with the '([^']*)'")]
+        public void ThenICanSeeTheAddedOnTheSkillRelatedToastMessageWithThe(string options4, string skill, string action1)
+        {
+            verifyToastMessageSkillActionsObj.VerifyToastMessageSkillActions(driver, skill, action1);
+        }
+
 
         [Then(@"I should be able to view the (added|updated) '([^']*)' and '([^']*)' on Skills section")]
         public void ThenIShouldBeAbleToViewTheAddedAndOnSkillsSection(string option, string skill, string skillLevel)
         {
             string addedSkill = addSkillActionsObj.GetAddedSkill(driver);
             string addedSkillLevel = addSkillLevelActionsObj.GetAddedSkillLevel(driver);
+
+            Console.WriteLine("Actual Language: " + addedSkill);
 
             Assert.That(addedSkill == skill, "Skill has not been updated");
             Assert.That(addedSkillLevel == skillLevel, "Skill Level has not been updated");
@@ -153,31 +226,55 @@ namespace ProjectMars.Feature
         {
             updateSkillActionsObj.UpdateSkillActions(driver, skill);
             updateSkillLevelActionsObj.UpdateSkillLevelActions(driver, skillLevel);
-            updateSkillOptionActionsObj.UpdateSkillOptionActions(driver, skill);
+            
         }
 
-        [When(@"I delete an existing skill")]
-        public void WhenIDeleteAnExistingSkill()
+        [Then(@"I click on the skill update button")]
+        public void ThenIClickOnTheSkillUpdateButton()
         {
-            skillDeleteActionsObj.GetDeletedSkill(driver);
-            skillDeleteActionsObj.SkillDeleteActions(driver, deletedSkill);
+            updateSkillOptionActionsObj.UpdateSkillOptionActions(driver);
         }
 
-        [Then(@"the deleted skill should not be similar to existing skill")]
-        public void ThenTheDeletedSkillShouldNotBeSimilarToExistingSkill()
+
+        [When(@"I delete the added skill")]
+        public void WhenIDeleteTheAddedSkill()
         {
-            string existingSkill = skillDeleteActionsObj.GetExistingSkill(driver);
-
-            Assert.That(deletedSkill != existingSkill, "Skill has not been deleted");
+            skillDeleteActionsObj.SkillDeleteActions(driver);
         }
 
-   
+        [Then(@"the deleted '([^']*)' should not be included on skills section")]
+        public void ThenTheDeletedShouldNotBeIncludedOnSkillsSection(string skill)
+        {
+            string existingLastSkill = skillDeleteActionsObj.GetExistingLastSkill(driver);
+
+            Assert.That(skill != existingLastSkill, "Skill has not been deleted");
+        }
+
+        [Then(@"I click on the skill add cancel button")]
+        public void ThenIClickOnTheSkillAddCancelButton()
+        {
+            addSkillCancelButtonActionsObj.AddSkillCancelButtonActions(driver);
+        }
+
+        [Then(@"I can see the existing last added '([^']*)' on the Skill section without any change")]
+        public void ThenICanSeeTheExistingLastAddedOnTheSkillSectionWithoutAnyChange(string skill)
+        {
+            string existingLastSkill = addSkillCancelButtonActionsObj.GetExistingLastSkill(driver);
+
+            Console.WriteLine("Skill: " + skill);
+            Console.WriteLine("Existing Skill: " + existingLastSkill);
+
+            Assert.That(skill != existingLastSkill, "Add skill cancellation failed");
+        }
+
+
+
         //User create profile
         //[Given(@"I provide '([^']*)', '([^']*)', '([^']*)', '([^']*)', '([^']*)', '([^']*)', '([^']*)', '([^']*)' and '([^']*)' on Service Listning page")]
-       // public void GivenIProvideAndOnServiceListningPage(string title, string description, string tags, string serviceType, string locationType, string skillTrade, string skillExchange, string endDate, string activeStatus)
-      //  {
-       //     createProfileActionsObj.CreateProfileActions(driver, title, description, tags, serviceType, locationType, skillTrade, skillExchange, endDate, activeStatus);
-       // }
+        // public void GivenIProvideAndOnServiceListningPage(string title, string description, string tags, string serviceType, string locationType, string skillTrade, string skillExchange, string endDate, string activeStatus)
+        //  {
+        //     createProfileActionsObj.CreateProfileActions(driver, title, description, tags, serviceType, locationType, skillTrade, skillExchange, endDate, activeStatus);
+        // }
 
 
         [AfterScenario]

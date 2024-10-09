@@ -86,16 +86,18 @@ namespace ProjectMars.SpecflowPages.Pages
         private readonly By deleteSkillButtonLocator = By.XPath("//*[@id=\"account-profile-section\"]/div/section[2]/div/div/div/div[3]/form/div[3]/div/div[2]/div/table/tbody[last()]/tr/td[3]/span[2]/i");
         IWebElement deleteSkillButton;
 
-        private readonly By deletedSkillLocator = By.XPath("//*[@id=\"account-profile-section\"]/div/section[2]/div/div/div/div[3]/form/div[3]/div/div[2]/div/table/tbody[last()]/tr/td[1]");
-        IWebElement deletedSkill;
 
-        private readonly By existingSkillLocator = By.XPath("//*[@id=\"account-profile-section\"]/div/section[2]/div/div/div/div[3]/form/div[3]/div/div[2]/div/table/tbody[last()]/tr/td[1]");
-        IWebElement existingSkill;
+        private readonly By existingLastSkillLocator = By.XPath("//*[@id=\"account-profile-section\"]/div/section[2]/div/div/div/div[3]/form/div[3]/div/div[2]/div/table/tbody[last()]/tr/td[1]");
+        IWebElement existingLastSkill;
+
+        private readonly By addSkillCancelButtonLocator = By.XPath("//*[@id=\"account-profile-section\"]/div/section[2]/div/div/div/div[3]/form/div[3]/div/div[2]/div/div/span/input[2]");
+        IWebElement addSkillCancelButton;
+
+        private readonly By updateSkillCancelButtonLocator = By.XPath("//*[@id=\"account-profile-section\"]/div/section[2]/div/div/div/div[3]/form/div[3]/div/div[2]/div/table/tbody[last()]/tr/td/div/span/input[2]");
+        IWebElement updateSkillCancelButton;
 
 
-
-        public void AddSkillActions(IWebDriver driver, string skill)
-
+        public void AddNewSkillButtonActions(IWebDriver driver)
         {
             Wait.WaitToBeClickable(driver, skillsTabLocator, 2);
             try
@@ -119,8 +121,11 @@ namespace ProjectMars.SpecflowPages.Pages
             {
                 Assert.Fail("Add New Skill Button not located:" + ex.Message);
             }
+        }
 
+        public void AddSkillActions(IWebDriver driver, string skill)
 
+        {
             Wait.WaitToBeClickable(driver, addSkillTextBoxLocator, 2);
             try
             {
@@ -174,7 +179,7 @@ namespace ProjectMars.SpecflowPages.Pages
             }
         }
 
-        public void AddSkillOptionActions(IWebDriver driver, string skill)
+        public void AddSkillButtonActions(IWebDriver driver)
         {
 
 
@@ -188,32 +193,60 @@ namespace ProjectMars.SpecflowPages.Pages
             {
                 Assert.Fail(" Add Skill Button not located:" + ex.Message);
             }
+        }
 
-            // verify the toast message
-            Wait.WaitToBeClickable(driver, toastMessageLocator, 1);
+        public void VerifyToastMessageSkillActions(IWebDriver driver, string skill, string action1)
+        {
+
+            Wait.WaitToBeClickable(driver, toastMessageLocator, 2);
             try
             {
                 toastMessage = driver.FindElement(toastMessageLocator);
 
                 string messageText = toastMessage.Text;
 
+                if (action1 == "Add")
+                {
 
-                if (messageText == skill + " has been added to your skills")
-                {
-                    Console.WriteLine("Toast message text is correct: " + messageText);
+                    if (messageText == skill + " has been added to your skills")
+                    {
+                        Console.WriteLine("Toast message text is correct: " + messageText);
+                    }
+                    else
+                    {
+                        Console.WriteLine("Toast message text is incorrect. Expected: Success, but found: " + messageText);
+                    }
                 }
-                else
+                else if (action1 == "Update")
                 {
-                    Console.WriteLine("Toast message text is incorrect. Expected: Success, but found: " + messageText);
+                    if (messageText == skill + " has been updated to your skills")
+                    {
+                        Console.WriteLine("Toast message text is correct: " + messageText);
+                    }
+                    else
+                    {
+                        Console.WriteLine("Toast message text is incorrect. Expected: Success, but found: " + messageText);
+                    }
+                }
+                else if (action1 == "Delete")
+                {
+                    if (messageText == skill + " has been deleted from your skills")
+                    {
+                        Console.WriteLine("Toast message text is correct: " + messageText);
+                    }
+                    else
+                    {
+                        Console.WriteLine("Toast message text is incorrect. Expected: Success, but found: " + messageText);
+                    }
                 }
             }
             catch (Exception ex)
             {
-                Assert.Fail(" Skill Add Toast message not located:" + ex.Message);
+                Assert.Fail(" skills Add Toast message not located:" + ex.Message);
             }
 
-
         }
+
 
         public string GetAddedSkill(IWebDriver driver)
         {
@@ -334,7 +367,7 @@ namespace ProjectMars.SpecflowPages.Pages
 
         }
 
-        public void UpdateSkillOptionActions(IWebDriver driver, string skill )
+        public void UpdateSkillOptionActions(IWebDriver driver)
         {
             Wait.WaitToBeClickable(driver, updateSkillButtonLocator, 2);
             try
@@ -346,33 +379,10 @@ namespace ProjectMars.SpecflowPages.Pages
             {
                 Assert.Fail("Update Button not located:" + ex.Message);
             }
+        }          
 
-            // verify the toast message
-            Wait.WaitToBeClickable(driver, toastMessageLocator, 1);
-            try
-            {
-                toastMessage = driver.FindElement(toastMessageLocator);
-
-                string messageText = toastMessage.Text;
-
-
-                if (messageText == skill + " has been updated to your skills")
-                {
-                    Console.WriteLine("Toast message text is correct: " + messageText);
-                }
-                else
-                {
-                    Console.WriteLine("Toast message text is incorrect. Expected: Success, but found: " + messageText);
-                }
-            }
-            catch (Exception ex)
-            {
-                Assert.Fail(" Skill Update Toast message not located:" + ex.Message);
-            }
-        }
-
-        // Method to get the skill that will be deleted
-        public string GetDeletedSkill(IWebDriver driver)
+        // Method to handle the skill delete action and verify the toast message
+        public void SkillDeleteActions(IWebDriver driver)
         {
             Wait.WaitToBeClickable(driver, skillsTabLocator, 2);
             try
@@ -385,15 +395,6 @@ namespace ProjectMars.SpecflowPages.Pages
                 Assert.Fail("Skills Tab not located:" + ex.Message);
             }
 
-            Wait.WaitToBeVisible(driver, deletedSkillLocator, 2);
-            IWebElement deletedSkill = driver.FindElement(deletedSkillLocator);
-            return deletedSkill.Text;
-        }
-
-        // Method to handle the skill delete action and verify the toast message
-        public void SkillDeleteActions(IWebDriver driver, string deletedSkillText)
-        {
-
             Wait.WaitToBeClickable(driver, deleteSkillButtonLocator, 2);
             try
             {
@@ -404,37 +405,56 @@ namespace ProjectMars.SpecflowPages.Pages
             {
                 Assert.Fail("Delete Skill Button not located:" + ex.Message);
             }
-
-            //verify the toast message
-            Wait.WaitToBeClickable(driver, toastMessageLocator, 1);
-            try
-            {
-            toastMessage = driver.FindElement(toastMessageLocator);
-
-            string messageText = toastMessage.Text;
-
-
-            if (messageText == deletedSkillText + " has been deleted from your skills")
-            {
-            Console.WriteLine("Toast message text is correct: " + messageText);
-            }
-            else
-              {
-                 Console.WriteLine("Toast message text is incorrect. Expected: Success, but found: " + messageText);
-             }
-             }
-            catch (Exception ex)
-              {
-             Assert.Fail(" Skill Delete Toast message not located:" + ex.Message);
-            }
         }
 
         // Method to get the existing skill to verify it against the deleted skill
-        public string GetExistingSkill(IWebDriver driver)
+        public string GetExistingLastSkill(IWebDriver driver)
         {
-            Wait.WaitToBeVisible(driver, existingSkillLocator, 2);
-            IWebElement existingSkill = driver.FindElement(existingSkillLocator);
-            return existingSkill.Text;
+            driver.Navigate().Refresh();
+            Wait.WaitToBeClickable(driver, skillsTabLocator, 2);
+            try
+            {
+                skillsTab = driver.FindElement(skillsTabLocator);
+                skillsTab.Click();
+            }
+            catch (Exception ex)
+            {
+                Assert.Fail("Skills Tab not located:" + ex.Message);
+            }
+
+            Wait.WaitToBeVisible(driver, existingLastSkillLocator, 2);
+            IWebElement existingLastSkill = driver.FindElement(existingLastSkillLocator);
+            return existingLastSkill.Text;
+        }
+
+        public void AddSkillCancelButtonActions(IWebDriver driver)
+        {
+
+            Wait.WaitToBeClickable(driver, addSkillCancelButtonLocator, 2);
+            try
+            {
+                addSkillCancelButton = driver.FindElement(addSkillCancelButtonLocator);
+                addSkillCancelButton.Click();
+            }
+            catch (Exception ex)
+            {
+                Assert.Fail("Add Skill Cancel Button not located:" + ex.Message);
+            }
+        }
+
+        public void UpdateSkillCancelButtonActions(IWebDriver driver)
+        {
+
+            Wait.WaitToBeClickable(driver, updateSkillCancelButtonLocator, 2);
+            try
+            {
+                updateSkillCancelButton = driver.FindElement(updateSkillCancelButtonLocator);
+                updateSkillCancelButton.Click();
+            }
+            catch (Exception ex)
+            {
+                Assert.Fail("Add Skill Cancel Button not located:" + ex.Message);
+            }
         }
 
     }
