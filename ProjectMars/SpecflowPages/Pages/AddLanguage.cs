@@ -116,15 +116,13 @@ namespace ProjectMars.SpecflowPages.Pages
         private readonly By updateLanguageCancelButtonLocator = By.XPath("//*[@id=\"account-profile-section\"]/div/section[2]/div/div/div/div[3]/form/div[2]/div/div[2]/div/table/tbody[last()]/tr/td/div/span/input[2]");
         IWebElement updateLanguageCancelButton;
 
-
-
-
-
         public void AddNewLanguageButtonActions(IWebDriver driver)
         {
+
             Wait.WaitToBeClickable(driver, languagesTabLocator, 2);
             try
             {
+                driver.Navigate().Refresh();
                 languagesTab = driver.FindElement(languagesTabLocator);
                 languagesTab.Click();
             }
@@ -143,7 +141,6 @@ namespace ProjectMars.SpecflowPages.Pages
             {
                 Assert.Fail("Add New Button not located:" + ex.Message);
             }
-
         }
         public void AddLanguageActions(IWebDriver driver, string language)
         {
@@ -191,7 +188,7 @@ namespace ProjectMars.SpecflowPages.Pages
                     languageLevelBasic = driver.FindElement(languageLevelBasicLocator);
                     languageLevelBasic.Click();
                 }
-                else
+                else if(languageLevel == "Native/Bilingual")
                 {
                     languageLevelNative = driver.FindElement(languageLevelNativeLocator);
                     languageLevelNative.Click();
@@ -236,7 +233,7 @@ namespace ProjectMars.SpecflowPages.Pages
 
                 string messageText = toastMessage.Text;
 
-                if (action == "Add")
+                if (action == "Add" || action == "AddExistingLanguageLevel")
                 {
 
                     if (messageText == language + " has been added to your languages")
@@ -270,16 +267,35 @@ namespace ProjectMars.SpecflowPages.Pages
                         Console.WriteLine("Toast message text is incorrect. Expected: Success, but found: " + messageText);
                     }
                 }
+                else if (action == "AddExistingLanguage")
+                {
+                    if (messageText == "This language is already exist in your language list.")
+                    {
+                        Console.WriteLine("Toast message text is correct: " + messageText);
+                    }
+                    else
+                    {
+                        Console.WriteLine("Toast message text is incorrect. Expected: Success, but found: " + messageText);
+                    }
+                }
+
+                else if (action == "AddNull")
+                {
+                    if (messageText == "Please enter language and level")
+                    {
+                        Console.WriteLine("Toast message text is correct: " + messageText);
+                    }
+                    else
+                    {
+                        Console.WriteLine("Toast message text is incorrect. Expected: Success, but found: " + messageText);
+                    }
+                }
             }
             catch (Exception ex)
             {
                 Assert.Fail(" Language Add Toast message not located:" + ex.Message);
             }
-
         }
-
-
-
         public string GetAddedLanguage(IWebDriver driver)
         {
 
@@ -491,7 +507,6 @@ namespace ProjectMars.SpecflowPages.Pages
             {
                 Assert.Fail("Delete Button not located:" + ex.Message);
             }
-
         }
         public string GetExistingLastLanguage(IWebDriver driver)
         {
@@ -500,6 +515,13 @@ namespace ProjectMars.SpecflowPages.Pages
             Wait.WaitToBeVisible(driver, existingLastLanguageLocator, 4);
             IWebElement existingLastLanguage = driver.FindElement(existingLastLanguageLocator);
             return existingLastLanguage.Text;
+        }
+        public string GetExistingLastLanguageLevel(IWebDriver driver)
+        {
+
+            Wait.WaitToBeVisible(driver, existingLastLanguageLevelLocator, 2);
+            IWebElement existingLastLanguageLevel = driver.FindElement(existingLastLanguageLevelLocator);
+            return existingLastLanguageLevel.Text;
         }
         public void AddLanguageCancelButtonActions(IWebDriver driver)
         {
@@ -515,7 +537,6 @@ namespace ProjectMars.SpecflowPages.Pages
                 Assert.Fail("Add Language Cancel Button not located:" + ex.Message);
             }
         }
-
         public void UpdateLanguageCancelButtonActions(IWebDriver driver)
         {
 
@@ -529,6 +550,14 @@ namespace ProjectMars.SpecflowPages.Pages
             {
                 Assert.Fail("Update Language Cancel Button not located:" + ex.Message);
             }
+        }
+
+        public void AddLanguageWithLongString(IWebDriver driver, string longLanguage, string languageLevel)
+        {
+            string longLanguageName = new string('A', 1000);  // 1000 'A' characters
+
+
+          
         }
 
 

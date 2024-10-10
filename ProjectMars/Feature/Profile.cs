@@ -31,6 +31,10 @@ namespace ProjectMars.Feature
 
         AddLanguage addLanguageCancelButtonActionsObj = new AddLanguage();
 
+        AddLanguage updateLanguageCancelButtonActionsObj = new AddLanguage();
+
+        AddLanguage addLanguageWithLongStringObj = new AddLanguage();
+
         AddSkill addNewSkillButtonActionsObj = new AddSkill();  
         AddSkill addSkillActionsObj = new AddSkill();
         AddSkill addSkillLevelActionsObj = new AddSkill();
@@ -44,7 +48,10 @@ namespace ProjectMars.Feature
         AddSkill updateSkillOptionActionsObj = new AddSkill();
 
         AddSkill skillDeleteActionsObj = new AddSkill();
+
         AddSkill addSkillCancelButtonActionsObj = new AddSkill();
+
+        AddSkill updateSkillCancelButtonActionsObj = new AddSkill();
 
         CreateProfile createProfileActionsObj = new CreateProfile();
 
@@ -61,16 +68,21 @@ namespace ProjectMars.Feature
             signInPageObj.LoginActions(driver);
         }
 
-        [Given(@"I click on the Add New button")]
+        [When(@"I click on the Add New button")]
         public void GivenIClickOnTheAddNewButton()
         {
             addNewLanguageButtonActionsObj.AddNewLanguageButtonActions(driver);
         }
 
 
-        [Given(@"I add new '([^']*)' and '([^']*)' to Languages section")]
+        [When(@"I add new '([^']*)' and '([^']*)' to Languages section")]
         public void GivenIAddNewAndToLanguagesSection(string language, string languageLevel)
         {
+            if (language == "HugeLanguage")
+            {
+                language = new string('A', 1000);  // provide huge payload
+            }
+
             addLanguageObj.AddLanguageActions(driver, language);
             addLanguageLevelObj.AddLanguageLevelActions(driver, languageLevel);
         }
@@ -92,10 +104,15 @@ namespace ProjectMars.Feature
         [Then(@"I should be able to view the (added|updated) '([^']*)' and '([^']*)' on Languages section")]
         public void ThenIShouldBeAbleToViewTheAddedAndOnLanguagesSection(string option2, string language, string languageLevel)
         {
+            if (language == "HugeLanguage")
+            {
+                language = new string('A', 1000); //Using inputh with a 1000 characters
+            }
 
             string addedLanguage = addLanguageObj.GetAddedLanguage(driver);
             string addedLanguageLevel = addLanguageLevelObj.GetAddedLanguageLevel(driver);
 
+            Console.WriteLine("Actual Language: " + addedLanguage);
             Console.WriteLine("Actual Language Level: " + addedLanguageLevel);
 
             Assert.That(addedLanguage == language, "Language has not been updated");
@@ -113,6 +130,11 @@ namespace ProjectMars.Feature
         public void ThenThePeopleSeekingForLanguagesCanSeeWhatAndIHold(string language, string languageLevel)
         {
             viewAddedLanguageDetailsOnProfilePageObj.ViewAddedLanguageDetailsOnProfilePage(driver, language, languageLevel);
+
+            if (language == "HugeLanguage")
+            {
+                language = new string('A', 1000);
+            }
 
             string addedLanguageProfilePage = viewAddedLanguageDetailsOnProfilePageObj.GetAddedLanguageProfilePage(driver);
             string addedLanguageLevelProfilePage = viewAddedLanguageDetailsOnProfilePageObj.GetAddedLanguageLevelProfilePage(driver);
@@ -158,8 +180,8 @@ namespace ProjectMars.Feature
             addLanguageCancelButtonActionsObj.AddLanguageCancelButtonActions(driver);
         }
 
-        [Then(@"I can see the existing last added '([^']*)' without any change")]
-        public void ThenICanSeeTheExistingLastAddedAndWithoutAnyChange(string language)
+        [Then(@"I can see the existing last added '([^']*)' on Languages section")]
+        public void ThenICanSeeTheExistingLastAddedOnLanguagesSection(string language)
         {
             string existingLastLanguage = addLanguageCancelButtonActionsObj.GetExistingLastLanguage(driver);
 
@@ -169,16 +191,48 @@ namespace ProjectMars.Feature
             Assert.That(language != existingLastLanguage, "Add language cancellation failed");
         }
 
-        [Given(@"I click on the Add New Skill button")]
+
+        [Given(@"I click on the update cancellation buttion")]
+        public void GivenIClickOnTheUpdateCancellationButtion()
+        {
+            updateLanguageCancelButtonActionsObj.UpdateLanguageCancelButtonActions(driver);
+        }
+
+        [Then(@"I can see the relevent '([^']*)' and '([^']*)' not updated on Languages section")]
+        public void ThenICanSeeTheReleventAndNotUpdatedOnLanguagesSection(string language, string languageLevel)
+        {
+            string existingLastLanguage = updateLanguageCancelButtonActionsObj.GetExistingLastLanguage(driver);
+            string existingLastLanguageLevel = updateLanguageCancelButtonActionsObj.GetExistingLastLanguageLevel(driver);
+
+            Console.WriteLine("Language: " + language);
+            Console.WriteLine("Existing Language: " + existingLastLanguage);
+
+            Assert.That(language != existingLastLanguage, "Language update cancellation failed");
+            Assert.That(languageLevel != existingLastLanguageLevel, "Language update cancellation failed");
+        }
+
+        [Given(@"I add a '([^']*)' and '([^']*)' to Languages section")]
+        public void GivenIAddALongLanguageAndToLanguagesSection(string longLanguage, string languageLevel)
+        {
+            addLanguageWithLongStringObj.AddLanguageWithLongString(driver, longLanguage, languageLevel);
+        }
+
+
+        [When(@"I click on the Add New Skill button")]
         public void GivenIClickOnTheAddNewSkillButton()
         {
             addNewSkillButtonActionsObj.AddNewSkillButtonActions(driver);
         }
 
 
-        [Given(@"I add new '([^']*)' and '([^']*)' to Skills section")]
+        [When(@"I add new '([^']*)' and '([^']*)' to Skills section")]
         public void GivenIAddNewAndToSkillsSection(string skill, string skillLevel)
         {
+            if (skill == "HugeSkill")
+            {
+                skill = new string('A', 1000);  // provide huge payload
+            }
+
             addSkillActionsObj.AddSkillActions(driver, skill);
             addSkillLevelActionsObj.AddSkillLevelActions(driver, skillLevel);
         }
@@ -199,6 +253,11 @@ namespace ProjectMars.Feature
         [Then(@"I should be able to view the (added|updated) '([^']*)' and '([^']*)' on Skills section")]
         public void ThenIShouldBeAbleToViewTheAddedAndOnSkillsSection(string option, string skill, string skillLevel)
         {
+            if (skill == "HugeSkill")
+            {
+                skill = new string('A', 1000);  // provide huge payload
+            }
+
             string addedSkill = addSkillActionsObj.GetAddedSkill(driver);
             string addedSkillLevel = addSkillLevelActionsObj.GetAddedSkillLevel(driver);
 
@@ -212,6 +271,11 @@ namespace ProjectMars.Feature
         public void ThenThePeopleSeekingForSkillsCanSeeWhatAndIHold(string skill, string skillLevel)
         {
             viewAddedSkillDetailsOnProfilePageObj.ViewAddedSkillDetailsOnProfilePage(driver, skill, skillLevel);
+
+            if (skill == "HugeSkill")
+            {
+                skill = new string('A', 1000);  // provide huge payload
+            }
 
             string addedSkillProfilePage = viewAddedSkillDetailsOnProfilePageObj.GetAddedSkillProfilePage(driver);
             string addedSkillLevelProfilePage = viewAddedSkillDetailsOnProfilePageObj.GetAddedSkillLevelProfilePage(driver);
@@ -256,8 +320,8 @@ namespace ProjectMars.Feature
             addSkillCancelButtonActionsObj.AddSkillCancelButtonActions(driver);
         }
 
-        [Then(@"I can see the existing last added '([^']*)' on the Skill section without any change")]
-        public void ThenICanSeeTheExistingLastAddedOnTheSkillSectionWithoutAnyChange(string skill)
+        [Then(@"I can see the existing last added '([^']*)' on the Skill section")]
+        public void ThenICanSeeTheExistingLastAddedOnTheSkillSection(string skill)
         {
             string existingLastSkill = addSkillCancelButtonActionsObj.GetExistingLastSkill(driver);
 
@@ -267,6 +331,25 @@ namespace ProjectMars.Feature
             Assert.That(skill != existingLastSkill, "Add skill cancellation failed");
         }
 
+
+        [Given(@"I click on the update skill cancellation button")]
+        public void GivenIClickOnTheUpdateSkillCancellationButtion()
+        {
+            updateSkillCancelButtonActionsObj.UpdateSkillCancelButtonActions(driver);
+        }
+
+        [Then(@"I can see the relevent '([^']*)' and '([^']*)' not updated on Skills section")]
+        public void ThenICanSeeTheReleventAndNotUpdatedOnSkillsSection(string skill, string skillLevel)
+        {
+            string existingLastSkill = updateSkillCancelButtonActionsObj.GetExistingLastSkill(driver);
+            string existingLastSkillLevel = updateSkillCancelButtonActionsObj.GetExistingLastSkillLevel(driver);
+
+            Console.WriteLine("Skill: " + skill);
+            Console.WriteLine("Existing Skill: " + existingLastSkill);
+
+            Assert.That(skill != existingLastSkill, "Skill update cancellation failed");
+            Assert.That(skill != existingLastSkillLevel, "Skill update cancellation failed");
+        }
 
 
         //User create profile

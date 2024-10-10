@@ -90,11 +90,14 @@ namespace ProjectMars.SpecflowPages.Pages
         private readonly By existingLastSkillLocator = By.XPath("//*[@id=\"account-profile-section\"]/div/section[2]/div/div/div/div[3]/form/div[3]/div/div[2]/div/table/tbody[last()]/tr/td[1]");
         IWebElement existingLastSkill;
 
+        private readonly By existingLastSkillLevelLocator = By.XPath("//*[@id=\"account-profile-section\"]/div/section[2]/div/div/div/div[3]/form/div[3]/div/div[2]/div/table/tbody[last()]/tr/td[2]");
+        IWebElement existingLastSkillLevel;  
+
         private readonly By addSkillCancelButtonLocator = By.XPath("//*[@id=\"account-profile-section\"]/div/section[2]/div/div/div/div[3]/form/div[3]/div/div[2]/div/div/span/input[2]");
         IWebElement addSkillCancelButton;
 
-        private readonly By updateSkillCancelButtonLocator = By.XPath("//*[@id=\"account-profile-section\"]/div/section[2]/div/div/div/div[3]/form/div[3]/div/div[2]/div/table/tbody[last()]/tr/td/div/span/input[2]");
-        IWebElement updateSkillCancelButton;
+        private readonly By updateSkillCancelButtonLocator = By.XPath("//input[@class = 'ui button' and @value = 'Cancel']");
+        IWebElement updateSkillCancelButton;   
 
 
         public void AddNewSkillButtonActions(IWebDriver driver)
@@ -102,6 +105,7 @@ namespace ProjectMars.SpecflowPages.Pages
             Wait.WaitToBeClickable(driver, skillsTabLocator, 2);
             try
             {
+                driver.Navigate().Refresh();
                 skillsTab = driver.FindElement(skillsTabLocator);
                 skillsTab.Click();
             }
@@ -167,7 +171,7 @@ namespace ProjectMars.SpecflowPages.Pages
                     skillLevelIntermediate = driver.FindElement(skillLevelIntermediateLocator);
                     skillLevelIntermediate.Click();
                 }
-                else
+                else if(skillLevel == "Expert")
                 {
                     skillLevelExpert = driver.FindElement(skillLevelExpertLocator);
                     skillLevelExpert.Click();
@@ -205,7 +209,7 @@ namespace ProjectMars.SpecflowPages.Pages
 
                 string messageText = toastMessage.Text;
 
-                if (action1 == "Add")
+                if (action1 == "Add" || action1 == "AddExistingSkillLevel")
                 {
 
                     if (messageText == skill + " has been added to your skills")
@@ -231,6 +235,30 @@ namespace ProjectMars.SpecflowPages.Pages
                 else if (action1 == "Delete")
                 {
                     if (messageText == skill + " has been deleted from your skills")
+                    {
+                        Console.WriteLine("Toast message text is correct: " + messageText);
+                    }
+                    else
+                    {
+                        Console.WriteLine("Toast message text is incorrect. Expected: Success, but found: " + messageText);
+                    }
+                }
+
+                else if (action1 == "AddExistingSkill")
+                {
+                    if (messageText == "This skill is already exist in your language list.")
+                    {
+                        Console.WriteLine("Toast message text is correct: " + messageText);
+                    }
+                    else
+                    {
+                        Console.WriteLine("Toast message text is incorrect. Expected: Success, but found: " + messageText);
+                    }
+                }
+
+                else if (action1 == "AddNull")
+                {
+                    if (messageText == "Please enter skill and experience level")
                     {
                         Console.WriteLine("Toast message text is correct: " + messageText);
                     }
@@ -427,6 +455,25 @@ namespace ProjectMars.SpecflowPages.Pages
             return existingLastSkill.Text;
         }
 
+        public string GetExistingLastSkillLevel(IWebDriver driver)
+        {
+            driver.Navigate().Refresh();
+            Wait.WaitToBeClickable(driver, skillsTabLocator, 2);
+            try
+            {
+                skillsTab = driver.FindElement(skillsTabLocator);
+                skillsTab.Click();
+            }
+            catch (Exception ex)
+            {
+                Assert.Fail("Skills Tab not located:" + ex.Message);
+            }
+
+            Wait.WaitToBeVisible(driver, existingLastSkillLevelLocator, 2);
+            IWebElement existingLastSkillLevel = driver.FindElement(existingLastSkillLevelLocator);
+            return existingLastSkillLevel.Text;
+        }
+
         public void AddSkillCancelButtonActions(IWebDriver driver)
         {
 
@@ -453,7 +500,7 @@ namespace ProjectMars.SpecflowPages.Pages
             }
             catch (Exception ex)
             {
-                Assert.Fail("Add Skill Cancel Button not located:" + ex.Message);
+                Assert.Fail("Update Skill Cancel Button not located:" + ex.Message);
             }
         }
 

@@ -87,7 +87,6 @@ namespace ProjectMars.Feature
         [NUnit.Framework.CategoryAttribute("regression")]
         [NUnit.Framework.TestCaseAttribute("English", "Fluent", "Add", "Kalpana Dissanayake", null)]
         [NUnit.Framework.TestCaseAttribute("German", "Conversational", "Add", "Kalpana Dissanayake", null)]
-        [NUnit.Framework.TestCaseAttribute("Chinese", "Basic", "Add", "Kalpana Dissanayake", null)]
         public void UserAddLanguages(string language, string languageLevel, string actionAdd, string user, string[] exampleTags)
         {
             string[] @__tags = new string[] {
@@ -117,10 +116,10 @@ this.ScenarioInitialize(scenarioInfo);
 this.FeatureBackground();
 #line hidden
 #line 11
- testRunner.And("I click on the Add New button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+ testRunner.When("I click on the Add New button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
 #line 12
- testRunner.And(string.Format("I add new \'{0}\' and \'{1}\' to Languages section", language, languageLevel), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+ testRunner.When(string.Format("I add new \'{0}\' and \'{1}\' to Languages section", language, languageLevel), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
 #line 13
  testRunner.Then("I click on the Add button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
@@ -145,8 +144,6 @@ this.FeatureBackground();
         [NUnit.Framework.DescriptionAttribute("User update languages")]
         [NUnit.Framework.TestCaseAttribute("Spanish", "Fluent", "Update", "Kalpana Dissanayake", null)]
         [NUnit.Framework.TestCaseAttribute("French", "Conversational", "Update", "Kalpana Dissanayake", null)]
-        [NUnit.Framework.TestCaseAttribute("Russian", "Basic", "Update", "Kalpana Dissanayake", null)]
-        [NUnit.Framework.TestCaseAttribute("Mandarin", "Native/Bilingual", "Update", "Kalpana Dissanayake", null)]
         public void UserUpdateLanguages(string language, string languageLevel, string actionUpdate, string user, string[] exampleTags)
         {
             string[] tagsOfScenario = exampleTags;
@@ -203,7 +200,7 @@ this.FeatureBackground();
             argumentsOfScenario.Add("ActionAdd", actionAdd);
             argumentsOfScenario.Add("ActionDelete", actionDelete);
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("User Delete language", null, tagsOfScenario, argumentsOfScenario, featureTags);
-#line 40
+#line 38
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
             if ((TagHelper.ContainsIgnoreTag(tagsOfScenario) || TagHelper.ContainsIgnoreTag(featureTags)))
@@ -216,28 +213,28 @@ this.ScenarioInitialize(scenarioInfo);
 #line 6
 this.FeatureBackground();
 #line hidden
+#line 39
+ testRunner.When("I click on the Add New button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line hidden
+#line 40
+ testRunner.When(string.Format("I add new \'{0}\' and \'{1}\' to Languages section", language, languageLevel), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line hidden
 #line 41
- testRunner.And("I click on the Add New button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line hidden
-#line 42
- testRunner.And(string.Format("I add new \'{0}\' and \'{1}\' to Languages section", language, languageLevel), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line hidden
-#line 43
  testRunner.Then("I click on the Add button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
-#line 44
+#line 42
  testRunner.Then(string.Format("I can see the added \'{0}\' on the toast message with the \'{1}\'", language, actionAdd), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
-#line 45
+#line 43
  testRunner.Then(string.Format("I should be able to view the added \'{0}\' and \'{1}\' on Languages section", language, languageLevel), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
-#line 46
+#line 44
  testRunner.When("I delete the added language", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
-#line 47
+#line 45
  testRunner.Then(string.Format("I can see the deleted \'{0}\' on the toast message with the \'{1}\'", language, actionDelete), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
-#line 48
+#line 46
  testRunner.Then(string.Format("the deleted \'{0}\' should not be included on languages section", language), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             }
@@ -254,7 +251,7 @@ this.FeatureBackground();
             argumentsOfScenario.Add("Language", language);
             argumentsOfScenario.Add("LanguageLevel", languageLevel);
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("User Cancel the Add language", null, tagsOfScenario, argumentsOfScenario, featureTags);
-#line 54
+#line 52
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
             if ((TagHelper.ContainsIgnoreTag(tagsOfScenario) || TagHelper.ContainsIgnoreTag(featureTags)))
@@ -267,17 +264,17 @@ this.ScenarioInitialize(scenarioInfo);
 #line 6
 this.FeatureBackground();
 #line hidden
+#line 53
+ testRunner.When("I click on the Add New button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line hidden
+#line 54
+ testRunner.When(string.Format("I add new \'{0}\' and \'{1}\' to Languages section", language, languageLevel), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line hidden
 #line 55
- testRunner.And("I click on the Add New button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line hidden
-#line 56
- testRunner.And(string.Format("I add new \'{0}\' and \'{1}\' to Languages section", language, languageLevel), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line hidden
-#line 57
  testRunner.Then("I click on the cancel button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
-#line 58
- testRunner.Then(string.Format("I can see the existing last added \'{0}\' without any change", language), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 56
+ testRunner.Then(string.Format("I can see the existing last added \'{0}\' on Languages section", language), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             }
             this.ScenarioCleanup();
@@ -285,12 +282,15 @@ this.FeatureBackground();
         
         [NUnit.Framework.TestAttribute()]
         [NUnit.Framework.DescriptionAttribute("User Cancel the Update Language")]
-        public void UserCancelTheUpdateLanguage()
+        [NUnit.Framework.TestCaseAttribute("Chinese", "Native/Bilingual", null)]
+        public void UserCancelTheUpdateLanguage(string language, string languageLevel, string[] exampleTags)
         {
-            string[] tagsOfScenario = ((string[])(null));
+            string[] tagsOfScenario = exampleTags;
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
+            argumentsOfScenario.Add("Language", language);
+            argumentsOfScenario.Add("LanguageLevel", languageLevel);
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("User Cancel the Update Language", null, tagsOfScenario, argumentsOfScenario, featureTags);
-#line 64
+#line 62
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
             if ((TagHelper.ContainsIgnoreTag(tagsOfScenario) || TagHelper.ContainsIgnoreTag(featureTags)))
@@ -302,6 +302,164 @@ this.ScenarioInitialize(scenarioInfo);
                 this.ScenarioStart();
 #line 6
 this.FeatureBackground();
+#line hidden
+#line 63
+ testRunner.And(string.Format("I update existing \'{0}\' and \'{1}\' on Languages section", language, languageLevel), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line hidden
+#line 64
+ testRunner.And("I click on the update cancellation buttion", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line hidden
+#line 65
+ testRunner.Then(string.Format("I can see the relevent \'{0}\' and \'{1}\' not updated on Languages section", language, languageLevel), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+            }
+            this.ScenarioCleanup();
+        }
+        
+        [NUnit.Framework.TestAttribute()]
+        [NUnit.Framework.DescriptionAttribute("User can add language with a huge payload")]
+        [NUnit.Framework.TestCaseAttribute("HugeLanguage", "Basic", "Add", "Kalpana Dissanayake", null)]
+        public void UserCanAddLanguageWithAHugePayload(string language, string languageLevel, string actionAdd, string user, string[] exampleTags)
+        {
+            string[] tagsOfScenario = exampleTags;
+            System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
+            argumentsOfScenario.Add("Language", language);
+            argumentsOfScenario.Add("LanguageLevel", languageLevel);
+            argumentsOfScenario.Add("ActionAdd", actionAdd);
+            argumentsOfScenario.Add("User", user);
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("User can add language with a huge payload", null, tagsOfScenario, argumentsOfScenario, featureTags);
+#line 71
+this.ScenarioInitialize(scenarioInfo);
+#line hidden
+            if ((TagHelper.ContainsIgnoreTag(tagsOfScenario) || TagHelper.ContainsIgnoreTag(featureTags)))
+            {
+                testRunner.SkipScenario();
+            }
+            else
+            {
+                this.ScenarioStart();
+#line 6
+this.FeatureBackground();
+#line hidden
+#line 72
+ testRunner.When("I click on the Add New button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line hidden
+#line 73
+ testRunner.When(string.Format("I add new \'{0}\' and \'{1}\' to Languages section", language, languageLevel), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line hidden
+#line 74
+ testRunner.Then("I click on the Add button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+#line 75
+ testRunner.Then(string.Format("I can see the added \'{0}\' on the toast message with the \'{1}\'", language, actionAdd), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+#line 76
+ testRunner.Then(string.Format("I should be able to view the added \'{0}\' and \'{1}\' on Languages section", language, languageLevel), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+#line 77
+ testRunner.When(string.Format("I open the \'{0}\' profile to view added languages", user), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line hidden
+#line 78
+ testRunner.Then(string.Format("the people seeking for languages can see what \'{0}\' and \'{1}\' I hold", language, languageLevel), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+            }
+            this.ScenarioCleanup();
+        }
+        
+        [NUnit.Framework.TestAttribute()]
+        [NUnit.Framework.DescriptionAttribute("User input duplicate inputs as language and language level")]
+        [NUnit.Framework.TestCaseAttribute("English", "English", "Fluent", "Add", "AddExistingLanguage", null)]
+        [NUnit.Framework.TestCaseAttribute("Spanish", "Korean", "Fluent", "Add", "AddExistingLanguageLevel", null)]
+        public void UserInputDuplicateInputsAsLanguageAndLanguageLevel(string firstLanguage, string secondLanguage, string languageLevel, string actionAdd, string actionAddExist, string[] exampleTags)
+        {
+            string[] tagsOfScenario = exampleTags;
+            System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
+            argumentsOfScenario.Add("FirstLanguage", firstLanguage);
+            argumentsOfScenario.Add("SecondLanguage", secondLanguage);
+            argumentsOfScenario.Add("LanguageLevel", languageLevel);
+            argumentsOfScenario.Add("ActionAdd", actionAdd);
+            argumentsOfScenario.Add("ActionAddExist", actionAddExist);
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("User input duplicate inputs as language and language level", null, tagsOfScenario, argumentsOfScenario, featureTags);
+#line 84
+this.ScenarioInitialize(scenarioInfo);
+#line hidden
+            if ((TagHelper.ContainsIgnoreTag(tagsOfScenario) || TagHelper.ContainsIgnoreTag(featureTags)))
+            {
+                testRunner.SkipScenario();
+            }
+            else
+            {
+                this.ScenarioStart();
+#line 6
+this.FeatureBackground();
+#line hidden
+#line 85
+ testRunner.When("I click on the Add New button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line hidden
+#line 86
+ testRunner.When(string.Format("I add new \'{0}\' and \'{1}\' to Languages section", firstLanguage, languageLevel), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line hidden
+#line 87
+ testRunner.Then("I click on the Add button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+#line 88
+ testRunner.Then(string.Format("I can see the added \'{0}\' on the toast message with the \'{1}\'", firstLanguage, actionAdd), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+#line 89
+ testRunner.Then(string.Format("I should be able to view the added \'{0}\' and \'{1}\' on Languages section", firstLanguage, languageLevel), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+#line 90
+ testRunner.When("I click on the Add New button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line hidden
+#line 91
+ testRunner.When(string.Format("I add new \'{0}\' and \'{1}\' to Languages section", secondLanguage, languageLevel), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line hidden
+#line 92
+ testRunner.Then("I click on the Add button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+#line 93
+ testRunner.Then(string.Format("I can see the added \'{0}\' on the toast message with the \'{1}\'", secondLanguage, actionAddExist), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+            }
+            this.ScenarioCleanup();
+        }
+        
+        [NUnit.Framework.TestAttribute()]
+        [NUnit.Framework.DescriptionAttribute("User input invalid inputs as language and language level")]
+        [NUnit.Framework.TestCaseAttribute("Turkish", "", "AddNull", null)]
+        [NUnit.Framework.TestCaseAttribute("", "Conversational", "AddNull", null)]
+        public void UserInputInvalidInputsAsLanguageAndLanguageLevel(string language, string languageLevel, string actionAdd, string[] exampleTags)
+        {
+            string[] tagsOfScenario = exampleTags;
+            System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
+            argumentsOfScenario.Add("Language", language);
+            argumentsOfScenario.Add("LanguageLevel", languageLevel);
+            argumentsOfScenario.Add("ActionAdd", actionAdd);
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("User input invalid inputs as language and language level", null, tagsOfScenario, argumentsOfScenario, featureTags);
+#line 101
+this.ScenarioInitialize(scenarioInfo);
+#line hidden
+            if ((TagHelper.ContainsIgnoreTag(tagsOfScenario) || TagHelper.ContainsIgnoreTag(featureTags)))
+            {
+                testRunner.SkipScenario();
+            }
+            else
+            {
+                this.ScenarioStart();
+#line 6
+this.FeatureBackground();
+#line hidden
+#line 102
+ testRunner.When("I click on the Add New button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line hidden
+#line 103
+ testRunner.When(string.Format("I add new \'{0}\' and \'{1}\' to Languages section", language, languageLevel), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line hidden
+#line 104
+ testRunner.Then("I click on the Add button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+#line 105
+ testRunner.Then(string.Format("I can see the added \'{0}\' on the toast message with the \'{1}\'", language, actionAdd), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             }
             this.ScenarioCleanup();
@@ -321,7 +479,7 @@ this.FeatureBackground();
             argumentsOfScenario.Add("ActionAdd", actionAdd);
             argumentsOfScenario.Add("User", user);
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("User add skills", null, tagsOfScenario, argumentsOfScenario, featureTags);
-#line 66
+#line 112
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
             if ((TagHelper.ContainsIgnoreTag(tagsOfScenario) || TagHelper.ContainsIgnoreTag(featureTags)))
@@ -334,25 +492,25 @@ this.ScenarioInitialize(scenarioInfo);
 #line 6
 this.FeatureBackground();
 #line hidden
-#line 67
- testRunner.And("I click on the Add New Skill button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 113
+ testRunner.When("I click on the Add New Skill button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
-#line 68
- testRunner.And(string.Format("I add new \'{0}\' and \'{1}\' to Skills section", skill, skillLevel), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 114
+ testRunner.When(string.Format("I add new \'{0}\' and \'{1}\' to Skills section", skill, skillLevel), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
-#line 69
+#line 115
  testRunner.Then("I click on the Add Skill button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
-#line 70
+#line 116
  testRunner.Then(string.Format("I can see the added \'{0}\' on the skill related toast message with the \'{1}\'", skill, actionAdd), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
-#line 71
+#line 117
  testRunner.Then(string.Format("I should be able to view the added \'{0}\' and \'{1}\' on Skills section", skill, skillLevel), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
-#line 72
+#line 118
  testRunner.When(string.Format("I open the \'{0}\' profile to view added skills", user), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
-#line 73
+#line 119
  testRunner.Then(string.Format("the people seeking for skills can see what \'{0}\' and \'{1}\' I hold", skill, skillLevel), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             }
@@ -373,7 +531,7 @@ this.FeatureBackground();
             argumentsOfScenario.Add("ActionUpdate", actionUpdate);
             argumentsOfScenario.Add("User", user);
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("User update skills", null, tagsOfScenario, argumentsOfScenario, featureTags);
-#line 81
+#line 127
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
             if ((TagHelper.ContainsIgnoreTag(tagsOfScenario) || TagHelper.ContainsIgnoreTag(featureTags)))
@@ -386,22 +544,22 @@ this.ScenarioInitialize(scenarioInfo);
 #line 6
 this.FeatureBackground();
 #line hidden
-#line 82
+#line 128
  testRunner.And(string.Format("I update existing \'{0}\' and \'{1}\' on Skills section", skill, skillLevel), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-#line 83
+#line 129
  testRunner.Then("I click on the skill update button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
-#line 84
+#line 130
  testRunner.Then(string.Format("I can see the updated \'{0}\' on the skill related toast message with the \'{1}\'", skill, actionUpdate), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
-#line 85
+#line 131
  testRunner.Then(string.Format("I should be able to view the updated \'{0}\' and \'{1}\' on Skills section", skill, skillLevel), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
-#line 86
+#line 132
  testRunner.When(string.Format("I open the \'{0}\' profile to view added skills", user), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
-#line 87
+#line 133
  testRunner.Then(string.Format("the people seeking for skills can see what \'{0}\' and \'{1}\' I hold", skill, skillLevel), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             }
@@ -420,7 +578,7 @@ this.FeatureBackground();
             argumentsOfScenario.Add("ActionAdd", actionAdd);
             argumentsOfScenario.Add("ActionDelete", actionDelete);
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("User Delete skills", null, tagsOfScenario, argumentsOfScenario, featureTags);
-#line 95
+#line 141
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
             if ((TagHelper.ContainsIgnoreTag(tagsOfScenario) || TagHelper.ContainsIgnoreTag(featureTags)))
@@ -433,28 +591,28 @@ this.ScenarioInitialize(scenarioInfo);
 #line 6
 this.FeatureBackground();
 #line hidden
-#line 96
- testRunner.And("I click on the Add New Skill button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 142
+ testRunner.When("I click on the Add New Skill button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
-#line 97
- testRunner.And(string.Format("I add new \'{0}\' and \'{1}\' to Skills section", skill, skillLevel), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 143
+ testRunner.When(string.Format("I add new \'{0}\' and \'{1}\' to Skills section", skill, skillLevel), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
-#line 98
+#line 144
  testRunner.Then("I click on the Add Skill button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
-#line 99
+#line 145
  testRunner.Then(string.Format("I can see the added \'{0}\' on the skill related toast message with the \'{1}\'", skill, actionAdd), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
-#line 100
+#line 146
  testRunner.Then(string.Format("I should be able to view the added \'{0}\' and \'{1}\' on Skills section", skill, skillLevel), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
-#line 101
+#line 147
  testRunner.When("I delete the added skill", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
-#line 102
+#line 148
  testRunner.Then(string.Format("I can see the deleted \'{0}\' on the skill related toast message with the \'{1}\'", skill, actionDelete), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
-#line 103
+#line 149
  testRunner.Then(string.Format("the deleted \'{0}\' should not be included on skills section", skill), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             }
@@ -471,7 +629,7 @@ this.FeatureBackground();
             argumentsOfScenario.Add("Skill", skill);
             argumentsOfScenario.Add("SkillLevel", skillLevel);
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("User cancel the Add Skill", null, tagsOfScenario, argumentsOfScenario, featureTags);
-#line 109
+#line 155
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
             if ((TagHelper.ContainsIgnoreTag(tagsOfScenario) || TagHelper.ContainsIgnoreTag(featureTags)))
@@ -484,17 +642,202 @@ this.ScenarioInitialize(scenarioInfo);
 #line 6
 this.FeatureBackground();
 #line hidden
-#line 110
- testRunner.And("I click on the Add New Skill button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 156
+ testRunner.When("I click on the Add New Skill button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
-#line 111
- testRunner.And(string.Format("I add new \'{0}\' and \'{1}\' to Skills section", skill, skillLevel), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 157
+ testRunner.When(string.Format("I add new \'{0}\' and \'{1}\' to Skills section", skill, skillLevel), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
-#line 112
+#line 158
  testRunner.Then("I click on the skill add cancel button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
-#line 113
- testRunner.Then(string.Format("I can see the existing last added \'{0}\' on the Skill section without any change", skill), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 159
+ testRunner.Then(string.Format("I can see the existing last added \'{0}\' on the Skill section", skill), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+            }
+            this.ScenarioCleanup();
+        }
+        
+        [NUnit.Framework.TestAttribute()]
+        [NUnit.Framework.DescriptionAttribute("User Cancel the Update Skill")]
+        [NUnit.Framework.TestCaseAttribute("API Testing", "Intermediate", null)]
+        public void UserCancelTheUpdateSkill(string skill, string skillLevel, string[] exampleTags)
+        {
+            string[] tagsOfScenario = exampleTags;
+            System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
+            argumentsOfScenario.Add("Skill", skill);
+            argumentsOfScenario.Add("SkillLevel", skillLevel);
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("User Cancel the Update Skill", null, tagsOfScenario, argumentsOfScenario, featureTags);
+#line 165
+this.ScenarioInitialize(scenarioInfo);
+#line hidden
+            if ((TagHelper.ContainsIgnoreTag(tagsOfScenario) || TagHelper.ContainsIgnoreTag(featureTags)))
+            {
+                testRunner.SkipScenario();
+            }
+            else
+            {
+                this.ScenarioStart();
+#line 6
+this.FeatureBackground();
+#line hidden
+#line 166
+ testRunner.And(string.Format("I update existing \'{0}\' and \'{1}\' on Languages section", skill, skillLevel), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line hidden
+#line 167
+ testRunner.And("I click on the update skill cancellation button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line hidden
+#line 168
+ testRunner.Then(string.Format("I can see the relevent \'{0}\' and \'{1}\' not updated on Skills section", skill, skillLevel), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+            }
+            this.ScenarioCleanup();
+        }
+        
+        [NUnit.Framework.TestAttribute()]
+        [NUnit.Framework.DescriptionAttribute("User can add skill with a huge payload")]
+        [NUnit.Framework.TestCaseAttribute("HugeSkill", "Beginner", "Add", "Kalpana Dissanayake", null)]
+        public void UserCanAddSkillWithAHugePayload(string skill, string skillLevel, string actionAdd, string user, string[] exampleTags)
+        {
+            string[] tagsOfScenario = exampleTags;
+            System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
+            argumentsOfScenario.Add("Skill", skill);
+            argumentsOfScenario.Add("SkillLevel", skillLevel);
+            argumentsOfScenario.Add("ActionAdd", actionAdd);
+            argumentsOfScenario.Add("User", user);
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("User can add skill with a huge payload", null, tagsOfScenario, argumentsOfScenario, featureTags);
+#line 174
+this.ScenarioInitialize(scenarioInfo);
+#line hidden
+            if ((TagHelper.ContainsIgnoreTag(tagsOfScenario) || TagHelper.ContainsIgnoreTag(featureTags)))
+            {
+                testRunner.SkipScenario();
+            }
+            else
+            {
+                this.ScenarioStart();
+#line 6
+this.FeatureBackground();
+#line hidden
+#line 175
+ testRunner.When("I click on the Add New Skill button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line hidden
+#line 176
+ testRunner.When(string.Format("I add new \'{0}\' and \'{1}\' to Skills section", skill, skillLevel), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line hidden
+#line 177
+ testRunner.Then("I click on the Add Skill button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+#line 178
+ testRunner.Then(string.Format("I can see the added \'{0}\' on the skill related toast message with the \'{1}\'", skill, actionAdd), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+#line 179
+ testRunner.Then(string.Format("I should be able to view the added \'{0}\' and \'{1}\' on Skills section", skill, skillLevel), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+#line 180
+ testRunner.When(string.Format("I open the \'{0}\' profile to view added skills", user), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line hidden
+#line 181
+ testRunner.Then(string.Format("the people seeking for skills can see what \'{0}\' and \'{1}\' I hold", skill, skillLevel), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+            }
+            this.ScenarioCleanup();
+        }
+        
+        [NUnit.Framework.TestAttribute()]
+        [NUnit.Framework.DescriptionAttribute("User input duplicate inputs as skill and skill level")]
+        [NUnit.Framework.TestCaseAttribute("Automation Testing", "Automation Testing", "Beginner", "Add", "AddExistingSkill", null)]
+        [NUnit.Framework.TestCaseAttribute("Security Testing", "Regression Testing", "Expert", "Add", "AddExistingSkillLevel", null)]
+        public void UserInputDuplicateInputsAsSkillAndSkillLevel(string firstSkill, string secondSkill, string skillLevel, string actionAdd, string actionAddExist, string[] exampleTags)
+        {
+            string[] tagsOfScenario = exampleTags;
+            System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
+            argumentsOfScenario.Add("FirstSkill", firstSkill);
+            argumentsOfScenario.Add("SecondSkill", secondSkill);
+            argumentsOfScenario.Add("SkillLevel", skillLevel);
+            argumentsOfScenario.Add("ActionAdd", actionAdd);
+            argumentsOfScenario.Add("ActionAddExist", actionAddExist);
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("User input duplicate inputs as skill and skill level", null, tagsOfScenario, argumentsOfScenario, featureTags);
+#line 187
+this.ScenarioInitialize(scenarioInfo);
+#line hidden
+            if ((TagHelper.ContainsIgnoreTag(tagsOfScenario) || TagHelper.ContainsIgnoreTag(featureTags)))
+            {
+                testRunner.SkipScenario();
+            }
+            else
+            {
+                this.ScenarioStart();
+#line 6
+this.FeatureBackground();
+#line hidden
+#line 188
+ testRunner.When("I click on the Add New Skill button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line hidden
+#line 189
+ testRunner.When(string.Format("I add new \'{0}\' and \'{1}\' to Skills section", firstSkill, skillLevel), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line hidden
+#line 190
+ testRunner.Then("I click on the Add Skill button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+#line 191
+ testRunner.Then(string.Format("I can see the added \'{0}\' on the skill related toast message with the \'{1}\'", firstSkill, actionAdd), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+#line 192
+ testRunner.Then(string.Format("I should be able to view the added \'{0}\' and \'{1}\' on Skills section", firstSkill, skillLevel), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+#line 193
+ testRunner.When("I click on the Add New Skill button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line hidden
+#line 194
+ testRunner.When(string.Format("I add new \'{0}\' and \'{1}\' to Skills section", secondSkill, skillLevel), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line hidden
+#line 195
+ testRunner.Then("I click on the Add Skill button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+#line 196
+ testRunner.Then(string.Format("I can see the added \'{0}\' on the skill related toast message with the \'{1}\'", secondSkill, actionAdd), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+            }
+            this.ScenarioCleanup();
+        }
+        
+        [NUnit.Framework.TestAttribute()]
+        [NUnit.Framework.DescriptionAttribute("User input invalid inputs as skill and skill level")]
+        [NUnit.Framework.TestCaseAttribute("Sanity Testing", "", "AddNull", null)]
+        [NUnit.Framework.TestCaseAttribute("", "Intermediate", "AddNull", null)]
+        public void UserInputInvalidInputsAsSkillAndSkillLevel(string skill, string skillLevel, string actionAdd, string[] exampleTags)
+        {
+            string[] tagsOfScenario = exampleTags;
+            System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
+            argumentsOfScenario.Add("Skill", skill);
+            argumentsOfScenario.Add("SkillLevel", skillLevel);
+            argumentsOfScenario.Add("ActionAdd", actionAdd);
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("User input invalid inputs as skill and skill level", null, tagsOfScenario, argumentsOfScenario, featureTags);
+#line 203
+this.ScenarioInitialize(scenarioInfo);
+#line hidden
+            if ((TagHelper.ContainsIgnoreTag(tagsOfScenario) || TagHelper.ContainsIgnoreTag(featureTags)))
+            {
+                testRunner.SkipScenario();
+            }
+            else
+            {
+                this.ScenarioStart();
+#line 6
+this.FeatureBackground();
+#line hidden
+#line 204
+ testRunner.When("I click on the Add New Skill button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line hidden
+#line 205
+ testRunner.When(string.Format("I add new \'{0}\' and \'{1}\' to Skills section", skill, skillLevel), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line hidden
+#line 206
+ testRunner.Then("I click on the Add Skill button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+#line 207
+ testRunner.Then(string.Format("I can see the added \'{0}\' on the skill related toast message with the \'{1}\'", skill, actionAdd), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             }
             this.ScenarioCleanup();

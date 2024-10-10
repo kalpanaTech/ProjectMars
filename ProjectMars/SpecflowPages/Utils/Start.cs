@@ -79,8 +79,15 @@ namespace ProjectMars.SpecflowPages.Utils
             addLanguageCancelButtonActionsObj.AddLanguageCancelButtonActions(driver);
         }
 
+        [Test, Order(4), Description("This test will be verified the update language cancellation process")]
+        public void UpdateLanguageCancellation_Start()
+        {
+            AddLanguage updateLanguageCancelButtonActionsObj = new AddLanguage();
+            updateLanguageCancelButtonActionsObj.UpdateLanguageCancelButtonActions(driver);
+        }
 
-        [Test, Order(4), Description("This test will be verified the Skill Add process")]
+
+        [Test, Order(5), Description("This test will be verified the Skill Add process")]
         public void AddSkill_Start()
         {
             AddSkill addNewSkillButtonActionsObj = new AddSkill();
@@ -104,7 +111,7 @@ namespace ProjectMars.SpecflowPages.Utils
 
         }
 
-        [Test, Order(5), Description("This test will be verified the Skill Updating process")]
+        [Test, Order(6), Description("This test will be verified the Skill Updating process")]
 
         public void UpdateSkill_Start()
         {
@@ -118,20 +125,29 @@ namespace ProjectMars.SpecflowPages.Utils
             updateSkillOptionActionsObj.UpdateSkillOptionActions(driver);
         }
 
-        [Test, Order(6), Description("This test will be verified the Skill Deleting process")]
+        [Test, Order(7), Description("This test will be verified the Skill Deleting process")]
         public void DeleteSkill_Start()
         {
             AddSkill skillDeleteActionsObj = new AddSkill();
             skillDeleteActionsObj.SkillDeleteActions(driver);
         }
 
-        [Test, Order(7), Description("This test will be verified the Add Skill cancellation process")]
+        [Test, Order(8), Description("This test will be verified the Add Skill cancellation process")]
         public void CancelSkill_Start()
         {
             AddSkill addSkillCancelButtonActionsObj = new AddSkill();
             addSkillCancelButtonActionsObj.AddSkillCancelButtonActions(driver);
         }
-        
+
+        [Test, Order(9), Description("This test will be verified the update skill cancellation process")]
+        public void UpdateSkillCancellation_Start()
+        {
+            AddSkill updateSkillCancelButtonActionsObj = new AddSkill();
+            updateSkillCancelButtonActionsObj.UpdateSkillCancelButtonActions(driver);
+
+        }
+
+
 
         //[Test, Order(7), Description("This test will be verified the creating profile process")]
         // public void CreateProfile_Start()
