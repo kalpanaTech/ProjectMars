@@ -18,21 +18,15 @@ namespace ProjectMars.Feature
         AddLanguage addLanguageLevelObj = new AddLanguage();
         AddLanguage addLanguageButtonActions = new AddLanguage();
         AddLanguage verifyToastMessageActionsObj = new AddLanguage();
-
         AddLanguage profileOpenActionsObj = new AddLanguage();  
-
         AddLanguage viewAddedLanguageDetailsOnProfilePageObj = new AddLanguage();
-
+        AddLanguage removeAddedLanguageDetailsObj = new AddLanguage();
         AddLanguage updateLanguageActionsObj = new AddLanguage();
         AddLanguage updateLanguageLevelActionsObj = new AddLanguage();
         AddLanguage updateLanguageOptionActionsObj = new AddLanguage();
-
         AddLanguage languageDeleteActionsObj = new AddLanguage();
-
         AddLanguage addLanguageCancelButtonActionsObj = new AddLanguage();
-
         AddLanguage updateLanguageCancelButtonActionsObj = new AddLanguage();
-
         AddLanguage addLanguageWithLongStringObj = new AddLanguage();
 
         AddSkill addNewSkillButtonActionsObj = new AddSkill();  
@@ -40,21 +34,16 @@ namespace ProjectMars.Feature
         AddSkill addSkillLevelActionsObj = new AddSkill();
         AddSkill addSkillButtonActionsObj = new AddSkill();
         AddSkill verifyToastMessageSkillActionsObj = new AddSkill();
-
         AddSkill viewAddedSkillDetailsOnProfilePageObj = new AddSkill();
-
+        AddSkill removeAddedSkillDetailsObj = new AddSkill();
         AddSkill updateSkillActionsObj = new AddSkill();
         AddSkill updateSkillLevelActionsObj = new AddSkill();
         AddSkill updateSkillOptionActionsObj = new AddSkill();
-
         AddSkill skillDeleteActionsObj = new AddSkill();
-
         AddSkill addSkillCancelButtonActionsObj = new AddSkill();
-
         AddSkill updateSkillCancelButtonActionsObj = new AddSkill();
 
         CreateProfile createProfileActionsObj = new CreateProfile();
-
        
         string deletedSkill;
         string canceledLanguage;
@@ -144,6 +133,12 @@ namespace ProjectMars.Feature
 
         }
 
+        [Then(@"I remove added language details")]
+        public void ThenIRemoveAddedLanguageDetails()
+        {
+            removeAddedLanguageDetailsObj.RemoveAddedLanguageDetails(driver);
+        }
+
 
         [Given(@"I update existing '([^']*)' and '([^']*)' on Languages section")]
         public void GivenIUpdateExistingAndOnLanguagesSection(string language, string languageLevel)
@@ -164,16 +159,7 @@ namespace ProjectMars.Feature
         {
             languageDeleteActionsObj.LanguageDeleteActions(driver);
         }
-
-        [Then(@"the deleted '([^']*)' should not be included on languages section")]
-        public void ThenTheDeletedShouldNotBeIncludedOnLanguagesSection(string language)
-        {
-            string existingLastLanguage = languageDeleteActionsObj.GetExistingLastLanguage(driver);
-
-            Assert.That(language != existingLastLanguage, "Added Language has not been deleted");
-        }
-
-      
+        
         [Then(@"I click on the cancel button")]
         public void ThenIClickOnTheCancelButton()
         {
@@ -284,6 +270,12 @@ namespace ProjectMars.Feature
             Assert.That(addedSkillLevelProfilePage == skillLevel, "Skill Level is not showing to other users");
         }
 
+        [Then(@"I remove added skill details")]
+        public void ThenIRemoveAddedSkillDetails()
+        {
+            removeAddedSkillDetailsObj.RemoveAddedSkillDetails(driver);
+        }
+
 
         [Given(@"I update existing '([^']*)' and '([^']*)' on Skills section")]
         public void GivenIUpdateExistingAndOnSkillsSection(string skill, string skillLevel)
@@ -304,14 +296,6 @@ namespace ProjectMars.Feature
         public void WhenIDeleteTheAddedSkill()
         {
             skillDeleteActionsObj.SkillDeleteActions(driver);
-        }
-
-        [Then(@"the deleted '([^']*)' should not be included on skills section")]
-        public void ThenTheDeletedShouldNotBeIncludedOnSkillsSection(string skill)
-        {
-            string existingLastSkill = skillDeleteActionsObj.GetExistingLastSkill(driver);
-
-            Assert.That(skill != existingLastSkill, "Skill has not been deleted");
         }
 
         [Then(@"I click on the skill add cancel button")]

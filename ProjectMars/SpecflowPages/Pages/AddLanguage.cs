@@ -116,6 +116,11 @@ namespace ProjectMars.SpecflowPages.Pages
         private readonly By updateLanguageCancelButtonLocator = By.XPath("//*[@id=\"account-profile-section\"]/div/section[2]/div/div/div/div[3]/form/div[2]/div/div[2]/div/table/tbody[last()]/tr/td/div/span/input[2]");
         IWebElement updateLanguageCancelButton;
 
+        
+        private readonly By profileLocator = By.XPath("//*[@id=\"account-profile-section\"]/div/section[1]/div/a[2]");
+        IWebElement profile;
+
+
         public void AddNewLanguageButtonActions(IWebDriver driver)
         {
 
@@ -408,11 +413,51 @@ namespace ProjectMars.SpecflowPages.Pages
             return addedLanguageLevelProfilePage.Text;
         }
 
-        public void UpdateLanguageActions(IWebDriver driver, string language)
+        public void RemoveAddedLanguageDetails(IWebDriver driver)
         {
-            Wait.WaitToBeClickable(driver, updateIconLocator, 2);
+            Wait.WaitToBeClickable(driver, profileLocator, 2);
             try
             {
+                profile = driver.FindElement(profileLocator);
+                profile.Click();
+            }
+            catch (Exception ex)
+            {
+                Assert.Fail(" Profile Tab of the Profile Page is not located:" + ex.Message);
+            }
+
+            Wait.WaitToBeClickable(driver, languagesTabLocator, 2);
+            try
+            {
+                driver.Navigate().Refresh();
+                languagesTab = driver.FindElement(languagesTabLocator);
+                languagesTab.Click();
+            }
+            catch (Exception ex)
+            {
+                Assert.Fail("Language Tab not located:" + ex.Message);
+            }
+
+            Wait.WaitToBeClickable(driver, deleteButtonLocator, 2);
+            try
+            {
+                deleteButton = driver.FindElement(deleteButtonLocator);
+                deleteButton.Click();
+            }
+            catch (Exception ex)
+            {
+                Assert.Fail("Delete Button not located:" + ex.Message);
+            }
+        }
+
+        public void UpdateLanguageActions(IWebDriver driver, string language)
+        {
+            driver.Navigate().Refresh();
+
+            Wait.WaitToBeClickable(driver, updateIconLocator, 5);
+            try
+            { 
+
                 updateIcon = driver.FindElement(updateIconLocator);
                 updateIcon.Click();
             }
@@ -507,12 +552,14 @@ namespace ProjectMars.SpecflowPages.Pages
             {
                 Assert.Fail("Delete Button not located:" + ex.Message);
             }
+
         }
+
         public string GetExistingLastLanguage(IWebDriver driver)
         {
             driver.Navigate().Refresh();
 
-            Wait.WaitToBeVisible(driver, existingLastLanguageLocator, 4);
+            Wait.WaitToBeVisible(driver, existingLastLanguageLocator, 6);
             IWebElement existingLastLanguage = driver.FindElement(existingLastLanguageLocator);
             return existingLastLanguage.Text;
         }

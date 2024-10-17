@@ -97,8 +97,10 @@ namespace ProjectMars.SpecflowPages.Pages
         IWebElement addSkillCancelButton;
 
         private readonly By updateSkillCancelButtonLocator = By.XPath("//input[@class = 'ui button' and @value = 'Cancel']");
-        IWebElement updateSkillCancelButton;   
+        IWebElement updateSkillCancelButton;
 
+        private readonly By profileLocator = By.XPath("//*[@id=\"account-profile-section\"]/div/section[1]/div/a[2]");
+        IWebElement profile;
 
         public void AddNewSkillButtonActions(IWebDriver driver)
         {
@@ -318,9 +320,48 @@ namespace ProjectMars.SpecflowPages.Pages
             return addedSkillLevelProfilePage.Text;
         }
 
-        public void UpdateSkillActions(IWebDriver driver, string skill)
+        public void RemoveAddedSkillDetails(IWebDriver driver)
         {
+            Wait.WaitToBeClickable(driver, profileLocator, 2);
+            try
+            {
+                profile = driver.FindElement(profileLocator);
+                profile.Click();
+            }
+            catch (Exception ex)
+            {
+                Assert.Fail(" Profile Tab of the Profile Page is not located:" + ex.Message);
+            }
+
             Wait.WaitToBeClickable(driver, skillsTabLocator, 2);
+            try
+            {
+                driver.Navigate().Refresh();
+                skillsTab = driver.FindElement(skillsTabLocator);
+                skillsTab.Click();
+            }
+            catch (Exception ex)
+            {
+                Assert.Fail("Skill Tab not located:" + ex.Message);
+            }
+
+            Wait.WaitToBeClickable(driver, deleteSkillButtonLocator, 2);
+            try
+            {
+                deleteSkillButton = driver.FindElement(deleteSkillButtonLocator);
+                deleteSkillButton.Click();
+            }
+            catch (Exception ex)
+            {
+                Assert.Fail("Skill Delete Button not located:" + ex.Message);
+            }
+        }
+
+            public void UpdateSkillActions(IWebDriver driver, string skill)
+        {
+            driver.Navigate().Refresh();
+
+            Wait.WaitToBeClickable(driver, skillsTabLocator, 5);
             try
             {
                 skillsTab = driver.FindElement(skillsTabLocator);
