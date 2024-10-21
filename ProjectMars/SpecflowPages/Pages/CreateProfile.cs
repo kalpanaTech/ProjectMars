@@ -76,9 +76,6 @@ namespace ProjectMars.SpecflowPages.Pages
         private readonly By saveButtonLocator = By.XPath("//input[@type = 'button' and @value = 'Save']");
         IWebElement saveButton;
 
-
-
-
         public void CreateProfileActions(IWebDriver driver, string title, string description, string tags, string serviceType, string locationType, string skillTrade, string skillExchange, string endDate, string activeStatus)
 
         {
@@ -305,10 +302,7 @@ namespace ProjectMars.SpecflowPages.Pages
                 Assert.Fail("Save Button not located:" + ex.Message);
             }
 
-
         }
-
-
 
     }   
 }

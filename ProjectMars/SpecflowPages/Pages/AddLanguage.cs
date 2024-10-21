@@ -160,7 +160,6 @@ namespace ProjectMars.SpecflowPages.Pages
                 Assert.Fail(" Add Language Text Box not located:" + ex.Message);
             }
         }
-
         public void AddLanguageLevelActions(IWebDriver driver, string languageLevel)
         {
 
@@ -199,7 +198,6 @@ namespace ProjectMars.SpecflowPages.Pages
                     languageLevelNative.Click();
                 }
 
-
             }
             catch (Exception ex)
             {
@@ -207,13 +205,8 @@ namespace ProjectMars.SpecflowPages.Pages
             }
         }
 
-
-
-
         public void AddLanguageButtonActions(IWebDriver driver)
         {
-
-
             Wait.WaitToBeClickable(driver, addLanguageButtonLocator, 2);
             try
             {
@@ -362,7 +355,7 @@ namespace ProjectMars.SpecflowPages.Pages
                 Assert.Fail(" User Search Box not located:" + ex.Message);
             }
 
-            Wait.WaitToBeClickable(driver, firstSearchResultLocator, 5);
+            Wait.WaitToBeClickable(driver, firstSearchResultLocator, 6);
             try
             {
                 firstSearchResult = driver.FindElement(firstSearchResultLocator);
@@ -384,7 +377,6 @@ namespace ProjectMars.SpecflowPages.Pages
                 Assert.Fail(" Searched User Profile not located:" + ex.Message);
             }
         }
-
         public void ViewAddedLanguageDetailsOnProfilePage(IWebDriver driver, string language, string languageLevel)
         {
             Wait.WaitToBeClickable(driver, languagesTabProfilePageLocator, 2);
@@ -435,19 +427,34 @@ namespace ProjectMars.SpecflowPages.Pages
             }
             catch (Exception ex)
             {
-                Assert.Fail("Language Tab not located:" + ex.Message);
+                Assert.Fail("Languages Tab not located:" + ex.Message);
             }
 
-            Wait.WaitToBeClickable(driver, deleteButtonLocator, 2);
-            try
+      
+            IList<IWebElement> deleteButton;
+            do
             {
-                deleteButton = driver.FindElement(deleteButtonLocator);
-                deleteButton.Click();
-            }
-            catch (Exception ex)
-            {
-                Assert.Fail("Delete Button not located:" + ex.Message);
-            }
+
+                deleteButton = driver.FindElements(deleteButtonLocator);
+
+                if (deleteButton.Count > 0)
+                {
+                    
+                    Wait.WaitToBeClickable(driver, deleteButtonLocator, 2);
+                    try
+                    {
+                        deleteButton[0].Click();
+                        Thread.Sleep(1000);
+                    }
+                    catch (Exception ex)
+                    {
+                        Assert.Fail("Delete Button not located or couldn't be clicked: " + ex.Message);
+                    }
+                    driver.Navigate().Refresh();  
+                    Thread.Sleep(2000);
+                   
+                }
+            } while (deleteButton.Count > 0);
         }
 
         public void UpdateLanguageActions(IWebDriver driver, string language)
@@ -477,7 +484,6 @@ namespace ProjectMars.SpecflowPages.Pages
             {
                 Assert.Fail("Last added language not located:" + ex.Message);
             }
-
 
         }
 
@@ -517,7 +523,6 @@ namespace ProjectMars.SpecflowPages.Pages
                     lastAddedlanguageLevelNative = driver.FindElement(lastAddedlanguageLevelNativeLocator);
                     lastAddedlanguageLevelNative.Click();
                 }
-
 
             }
             catch (Exception ex)
@@ -601,12 +606,9 @@ namespace ProjectMars.SpecflowPages.Pages
 
         public void AddLanguageWithLongString(IWebDriver driver, string longLanguage, string languageLevel)
         {
-            string longLanguageName = new string('A', 1000);  // 1000 'A' characters
-
-
+            string longLanguageName = new string('A', 1000);  // 1000 'A' character
           
         }
-
 
     }
 }

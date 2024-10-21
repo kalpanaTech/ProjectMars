@@ -57,15 +57,11 @@ namespace ProjectMars.SpecflowPages.Pages
         private readonly By addedSkillLevelProfilePageLocator = By.XPath("//*[@id=\"account-profile-section\"]/div/section[2]/div/div/div/div[3]/form/div[4]/table/tbody/tr[last()]/td[2]");
         IWebElement addedSkillLevelProfilePage;
 
-
-
-
         private readonly By updateSkillIconLocator = By.XPath("//*[@id=\"account-profile-section\"]/div/section[2]/div/div/div/div[3]/form/div[3]/div/div[2]/div/table/tbody[last()]/tr/td[3]/span[1]/i");
         IWebElement updateSkillIcon;                             
 
         private readonly By lastAddedSkillLocator = By.XPath("//*[@id=\"account-profile-section\"]/div/section[2]/div/div/div/div[3]/form/div[3]/div/div[2]/div/table/tbody[last()]/tr/td/div/div[1]/input");
         IWebElement lastAddedSkill;
-
 
         private readonly By lastAddedSkillLevelDropdownLocator = By.XPath("//*[@id=\"account-profile-section\"]/div/section[2]/div/div/div/div[3]/form/div[3]/div/div[2]/div/table/tbody[last()]/tr/td/div/div[2]/select");
         IWebElement lastAddedSkillLevelDropdown;
@@ -82,10 +78,8 @@ namespace ProjectMars.SpecflowPages.Pages
         private readonly By updateSkillButtonLocator = By.XPath("//*[@id=\"account-profile-section\"]/div/section[2]/div/div/div/div[3]/form/div[3]/div/div[2]/div/table/tbody[last()]/tr/td/div/span/input[1]");
         IWebElement updateSkillButton;
 
-
         private readonly By deleteSkillButtonLocator = By.XPath("//*[@id=\"account-profile-section\"]/div/section[2]/div/div/div/div[3]/form/div[3]/div/div[2]/div/table/tbody[last()]/tr/td[3]/span[2]/i");
         IWebElement deleteSkillButton;
-
 
         private readonly By existingLastSkillLocator = By.XPath("//*[@id=\"account-profile-section\"]/div/section[2]/div/div/div/div[3]/form/div[3]/div/div[2]/div/table/tbody[last()]/tr/td[1]");
         IWebElement existingLastSkill;
@@ -143,9 +137,6 @@ namespace ProjectMars.SpecflowPages.Pages
                 Assert.Fail("Add Skill TextBox not located:" + ex.Message);
             }
         }
-
-
-
         public void AddSkillLevelActions(IWebDriver driver, string skillLevel)
         {
 
@@ -277,7 +268,6 @@ namespace ProjectMars.SpecflowPages.Pages
 
         }
 
-
         public string GetAddedSkill(IWebDriver driver)
         {
             Wait.WaitToBeClickable(driver, addedSkillLocator, 2);
@@ -345,16 +335,36 @@ namespace ProjectMars.SpecflowPages.Pages
                 Assert.Fail("Skill Tab not located:" + ex.Message);
             }
 
-            Wait.WaitToBeClickable(driver, deleteSkillButtonLocator, 2);
-            try
+            IList<IWebElement> deleteSkillButton;
+            do
             {
-                deleteSkillButton = driver.FindElement(deleteSkillButtonLocator);
-                deleteSkillButton.Click();
-            }
-            catch (Exception ex)
-            {
-                Assert.Fail("Skill Delete Button not located:" + ex.Message);
-            }
+
+                deleteSkillButton = driver.FindElements(deleteSkillButtonLocator);
+
+                if (deleteSkillButton.Count > 0)
+                {
+                    
+                    Wait.WaitToBeClickable(driver, deleteSkillButtonLocator, 2);
+                    try
+                    {
+                        deleteSkillButton[0].Click();
+                        Thread.Sleep(1000);
+
+                    }
+                    catch (Exception ex)
+                    {
+                        Assert.Fail("Delete Skill Button not located or couldn't be clicked: " + ex.Message);
+                    }
+                    driver.Navigate().Refresh();
+
+                    Wait.WaitToBeClickable(driver, skillsTabLocator, 2);
+
+                    skillsTab = driver.FindElement(skillsTabLocator);
+                    skillsTab.Click();
+                    Thread.Sleep(2000);
+                   
+                }
+            } while (deleteSkillButton.Count > 0);
         }
 
             public void UpdateSkillActions(IWebDriver driver, string skill)
@@ -394,7 +404,6 @@ namespace ProjectMars.SpecflowPages.Pages
             {
                 Assert.Fail("Last added skill not located:" + ex.Message);
             }
-
         }
 
         public void UpdateSkillLevelActions(IWebDriver driver, string skillLevel)
@@ -433,7 +442,6 @@ namespace ProjectMars.SpecflowPages.Pages
             {
                 Assert.Fail(" Skill Level not located:" + ex.Message);
             }
-
         }
 
         public void UpdateSkillOptionActions(IWebDriver driver)
@@ -449,8 +457,6 @@ namespace ProjectMars.SpecflowPages.Pages
                 Assert.Fail("Update Button not located:" + ex.Message);
             }
         }          
-
-        // Method to handle the skill delete action and verify the toast message
         public void SkillDeleteActions(IWebDriver driver)
         {
             Wait.WaitToBeClickable(driver, skillsTabLocator, 2);
@@ -476,7 +482,6 @@ namespace ProjectMars.SpecflowPages.Pages
             }
         }
 
-        // Method to get the existing skill to verify it against the deleted skill
         public string GetExistingLastSkill(IWebDriver driver)
         {
             driver.Navigate().Refresh();
@@ -529,7 +534,6 @@ namespace ProjectMars.SpecflowPages.Pages
                 Assert.Fail("Add Skill Cancel Button not located:" + ex.Message);
             }
         }
-
         public void UpdateSkillCancelButtonActions(IWebDriver driver)
         {
 
