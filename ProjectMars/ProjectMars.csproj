@@ -1,0 +1,42 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net6.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="SpecflowTests\**" />
+    <Compile Remove="TestReports\**" />
+    <Compile Remove="Tests\**" />
+    <EmbeddedResource Remove="SpecflowTests\**" />
+    <EmbeddedResource Remove="TestReports\**" />
+    <EmbeddedResource Remove="Tests\**" />
+    <None Remove="SpecflowTests\**" />
+    <None Remove="TestReports\**" />
+    <None Remove="Tests\**" />
+    <SpecFlowFeatureFiles Remove="SpecflowTests\**" />
+    <SpecFlowFeatureFiles Remove="TestReports\**" />
+    <SpecFlowFeatureFiles Remove="Tests\**" />
+    <SpecFlowObsoleteCodeBehindFiles Remove="SpecflowTests\**" />
+    <SpecFlowObsoleteCodeBehindFiles Remove="TestReports\**" />
+    <SpecFlowObsoleteCodeBehindFiles Remove="Tests\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="DotNetSeleniumExtras.WaitHelpers" Version="3.11.0" />
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.11.1" />
+    <PackageReference Include="NUnit" Version="4.2.2" />
+    <PackageReference Include="NUnit3TestAdapter" Version="4.6.0" />
+    <PackageReference Include="Selenium.Support" Version="4.25.0" />
+    <PackageReference Include="Selenium.WebDriver" Version="4.25.0" />
+    <PackageReference Include="Selenium.WebDriver.ChromeDriver" Version="129.0.6668.5800" />
+    <PackageReference Include="SpecFlow" Version="3.9.74" />
+    <PackageReference Include="SpecFlow.NUnit" Version="3.9.74" />
+    <PackageReference Include="SpecFlow.Tools.MsBuild.Generation" Version="3.9.74" />
+  </ItemGroup>
+
+</Project>
